@@ -1,0 +1,32 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <li class="list-inline-item">
+        @Html.ActionLink("Exit",
+       "LogOut",
+       "Account",
+       routeValues:null,
+       htmlAttributes:new { @class = "btn btn-outline-danger",
+           title = "Run out from here!"})
+    </li>
+}
+else
+{
+    <li class="list-inline-item">
+        @Html.ActionLink("Sign Up",
+       "Register",
+       "Account",
+       routeValues:null,
+       htmlAttributes:new { @class = "btn btn-outline-success",
+           title = "Hello, my dear new friend!"
+       })
+    </li>
+
+    <li class="list-inline-item">
+        @Html.ActionLink("Sign In",
+       "Login",
+       "Account",
+       routeValues:null,
+       htmlAttributes:new { @class = "btn btn-outline-primary",
+           title = "Hello, my dear old friend!"})
+    </li>
+}
