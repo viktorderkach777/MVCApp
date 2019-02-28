@@ -8,6 +8,7 @@ namespace MVCApp
     {
         public string SkinColor { get; set; }
 
+        //gkjgkjgkjgk
         public DateTime? LastVisit { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
