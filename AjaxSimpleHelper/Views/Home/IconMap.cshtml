@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+
+    var options = new AjaxOptions()
+    {
+        Url = Url.Action("OrderedPlaces"),
+        UpdateTargetId = "tablebody"
+
+    };
+}
+
+
+<h2>IconMap</h2>
+
+@using (Ajax.BeginForm(options))
+{
+    <table>
+        <thead cellspacing="5">
+            <tr>
+                <th> Id </th>
+                <th> Name </th>
+                <th> LinkRef </th>
+                <th> LinkText </th>
+                <th>  AboutPlace</th>
+                <th> OpenTime </th>
+                <th> CloseTime </th>
+                <th> Rate </th>
+                <th> Icon</th>
+                <th> Longitude </th>
+                <th> Latitude </th>             
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+            @Html.Action("OrderedPlaces", new { id = Model })
+        </tbody>
+    </table>
+
+    <p>
+        @Html.DropDownList("id",
+        new SelectList(new[] {"all", "theatre", "museum", "lodging" },
+        (Model ?? "all")))
+        <input type="submit" value="Get ordered places" />
+
+    </p>
+
+    @section scripts
+    {
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    }
+}
+

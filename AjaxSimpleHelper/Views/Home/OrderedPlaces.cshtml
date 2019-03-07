@@ -1,0 +1,20 @@
+﻿@using AjaxSimpleHelper.Models
+
+@model IEnumerable<DBPlace>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>@Html.DisplayFor(m => item.Id)</td>
+    <td>@Html.DisplayFor(m => item.Name)</td>
+    <td>@Html.DisplayFor(m => item.LinkRef)</td>
+    <td>@Html.DisplayFor(m => item.LinkText)</td>
+    <td>@Html.DisplayFor(m => item.AboutPlace)</td>
+    <td>@Html.DisplayFor(m => item.OpenTime)</td>
+    <td>@Html.DisplayFor(m => item.CloseTime)</td>
+    <td>@Html.DisplayFor(m => item.Rate)</td>
+    <td>@Html.DisplayFor(m => item.Icon)</td>
+    <td>@Html.DisplayFor(m => item.Longitude)</td>
+    <td>@Html.DisplayFor(m => item.Latitude)</td>
+</tr>
+}
