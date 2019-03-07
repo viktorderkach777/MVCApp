@@ -27,7 +27,7 @@
                 <th> Rate </th>
                 <th> Icon</th>
                 <th> Longitude </th>
-                <th> Latitude </th>             
+                <th> Latitude </th>
             </tr>
         </thead>
         <tbody id="tablebody">
@@ -39,13 +39,43 @@
         @Html.DropDownList("id",
         new SelectList(new[] {"all", "theatre", "museum", "lodging" },
         (Model ?? "all")))
+
+        @Html.DropDownList("OpenTime",
+       new SelectList(new[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"},
+       (Model ?? "8")))
+
+        @Html.DropDownList("CloseTime",
+      new SelectList(new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" },
+      (Model ?? "18")))
+
+        @Html.DropDownList("Rate",
+     new SelectList(new[] { "0", "1", "2", "3", "4", "5"},
+     (Model ?? "0")))
+
         <input type="submit" value="Get ordered places" />
 
     </p>
+
+
+    @*<p>
+            <label for="amount">Rate:</label>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range-max"></div>*@
+
+    <p>
+        <label for="amount">Time range:</label>
+        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    </p>
+
+    <div id="slider-range"></div>
+
 
     @section scripts
     {
         <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     }
+
+
 }
 

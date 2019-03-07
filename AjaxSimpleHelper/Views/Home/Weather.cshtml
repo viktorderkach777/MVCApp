@@ -1,0 +1,118 @@
+﻿@*<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.0/mapbox-gl-language.js'></script>
+
+
+
+    <div id="main" class="container">
+        <div id='map'></div>
+        <div id="entercity" class="container">
+            <div class="row" id="appSummary">
+                <div class="col text-center text-primary">
+                    <h3>Enter City Name</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="search" class="container">
+            <div class="row form-group form-inline" id="rowDiv">
+                <div class="col text-center text-primary">
+
+                    <input type="text" name="city" id="city" class="form-control" placeholder="City Name">
+                    <button id="submitWeather" class="btn btn-primary"> Search City</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Current weather</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Some additional data about this city</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">City wind data</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="home" class="container tab-pane active">
+                    <br>
+                    <div id="show">
+                    </div>
+                </div>
+                <div id="menu1" class="container tab-pane fade">
+                    <br>
+                    <div id="show1">
+                    </div>
+                </div>
+                <div id="menu2" class="container tab-pane fade">
+                    <br>
+                    <div id="show2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+@*<!DOCTYPE html>
+<html>
+<head>*@
+    @*<meta charset='utf-8' />
+    <title>Display a map</title>*@
+    @*<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />*@
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+@*</head>
+<body>*@
+
+    <div id='map'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
+        let placeType = "city ";
+        let cityName = "Rivne";
+        let marker = null;
+        let markerArray = [];
+        let coordX = null;
+        let coordY = null;
+        let markerCenterX = null;
+        let markerCenterY = null;
+        let longitude = 26.25;
+        let latitude = 50.61;
+        let myZoom = 6;
+        let myStyle = 'mapbox://styles/mapbox/streets-v9';
+        let myLanguage = 'en';
+        let markerColor = "#3FB1CE";
+        let markerDraggable = true;
+        let mapRotation = true;
+
+
+        let map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: myStyle,
+            center: [longitude, latitude], // starting position
+            zoom: myZoom // starting zoom
+        });
+    </script>
+
+@*</body>
+</html>*@

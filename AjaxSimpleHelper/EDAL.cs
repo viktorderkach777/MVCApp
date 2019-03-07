@@ -45,10 +45,10 @@ namespace AjaxSimpleHelper
 
         public ICollection<DBPlace> GetDBPlacesByIcon(string icon)
         {
-            if (!String.IsNullOrEmpty(icon))
+            //if (!String.IsNullOrEmpty(icon))
             {          
 
-                if (icon == "all")
+                if (icon == "all" || icon==null)
                 {
                     return _ctx.DBPlaces.ToList();
                 }
@@ -56,7 +56,7 @@ namespace AjaxSimpleHelper
                 return _ctx.DBPlaces.Where(p =>  p.Icon == icon).ToList();
             }
 
-            return null;
+            //return null;
         }
 
 

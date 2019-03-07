@@ -54,12 +54,12 @@ namespace AjaxSimpleHelper.Controllers
 
         public ActionResult OrderedPlaces(string id)
         {
-            //var icons = _dal.GetDBPlacesByIcon(id); 
-            var icons = _ctx.DBPlaces;
+            var icons = _dal.GetDBPlacesByIcon(id); 
+            //var icons = _ctx.DBPlaces;
 
             //if (!String.IsNullOrEmpty(id) && id != "all")
             //{
-            //    icons = _ctx.DBPlaces.Where(o => o.Icon == id).ToList();
+            //    icons = _dal..Where(o => o.Icon == id).ToList();
             //}
 
             //if (!String.IsNullOrEmpty(id) && id != "all")
@@ -84,6 +84,19 @@ namespace AjaxSimpleHelper.Controllers
             }
 
             return null;
+        }
+
+
+        [HttpGet]
+        public ActionResult Weather()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Weather(string id)
+        {
+            return View("Weather", (object)id);
         }
 
     }

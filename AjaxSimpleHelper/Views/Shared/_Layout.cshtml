@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryui-css")
+    @*@Styles.Render("~/Content/themes/base/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -38,5 +40,77 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script>
+
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 24,
+                values: [8, 18],
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0] + " : 00 - " + ui.values[1] + " : 00");
+                }
+            });
+            $("#amount").val(" " + $("#slider-range").slider("values", 0) + " : 00 - " +
+                + $("#slider-range").slider("values", 1) + " : 00");
+        });
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
+
+        $(document).ready(function () {
+
+            let placeType = "city ";
+            let cityName = "Rivne";
+            let marker = null;
+            let markerArray = [];
+            let coordX = null;
+            let coordY = null;
+            let markerCenterX = null;
+            let markerCenterY = null;
+            let longitude = 26.25;
+            let latitude = 50.61;
+            let myZoom = 6;
+            let myStyle = 'mapbox://styles/mapbox/streets-v9';
+            let myLanguage = 'en';
+            let markerColor = "#3FB1CE";
+            let markerDraggable = true;
+            let mapRotation = true;
+
+
+            let map = new mapboxgl.Map({
+                container: 'map', // container id
+                style: myStyle,
+                center: [longitude, latitude], // starting position
+                zoom: myZoom // starting zoom
+            });
+        });
+        //$(function () {
+
+        //    $("#slider-range-max").slider({
+
+        //        range: "max",
+
+        //        min: 0,
+
+        //        max: 5,
+
+        //        value: 1,
+
+        //        slide: function (event, ui) {
+
+        //            $("#amount").val(ui.value);
+
+        //        }
+
+        //    });
+
+        //    $("#amount").val($("#slider-range-max").slider("value"));
+
+        //});
+
+    </script>
 </body>
 </html>
