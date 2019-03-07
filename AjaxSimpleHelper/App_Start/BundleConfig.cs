@@ -28,10 +28,12 @@ namespace AjaxSimpleHelper
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css", "~/Content/SliderMap.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqueryui-css").Include(
                      "~/Content/themes/base/jquery-ui.min.css"));
+
+          
 
             //bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
             //           "~/Content/themes/base/jquery.ui.core.css",

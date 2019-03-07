@@ -8,9 +8,11 @@
     @Styles.Render("~/Content/jqueryui-css")
     @*@Styles.Render("~/Content/themes/base/css")*@
     @Scripts.Render("~/bundles/modernizr")
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,8 +30,98 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </div>*@
+
+
+
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <p>Dummy Heading</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
+</div>
+
+
+
+    <div id="content">  @*class="container body-content">*@
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         @RenderBody()
         <hr />
         <footer>
@@ -37,80 +129,80 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jqueryui")
 
-    <script>
+        <script>
 
-        $(function () {
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: 24,
-                values: [8, 18],
-                slide: function (event, ui) {
-                    $("#amount").val(ui.values[0] + " : 00 - " + ui.values[1] + " : 00");
-                }
+            $(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 24,
+                    values: [8, 18],
+                    slide: function (event, ui) {
+                        $("#amount").val(ui.values[0] + ":00 - " + ui.values[1] + ":00");
+                    }
+                });
+                $("#amount").val(" " + $("#slider-range").slider("values", 0) + ":00 - " +
+                    + $("#slider-range").slider("values", 1) + ":00");
             });
-            $("#amount").val(" " + $("#slider-range").slider("values", 0) + " : 00 - " +
-                + $("#slider-range").slider("values", 1) + " : 00");
-        });
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            let placeType = "city ";
-            let cityName = "Rivne";
-            let marker = null;
-            let markerArray = [];
-            let coordX = null;
-            let coordY = null;
-            let markerCenterX = null;
-            let markerCenterY = null;
-            let longitude = 26.25;
-            let latitude = 50.61;
-            let myZoom = 6;
-            let myStyle = 'mapbox://styles/mapbox/streets-v9';
-            let myLanguage = 'en';
-            let markerColor = "#3FB1CE";
-            let markerDraggable = true;
-            let mapRotation = true;
+                let placeType = "city ";
+                let cityName = "Rivne";
+                let marker = null;
+                let markerArray = [];
+                let coordX = null;
+                let coordY = null;
+                let markerCenterX = null;
+                let markerCenterY = null;
+                let longitude = 26.25;
+                let latitude = 50.61;
+                let myZoom = 6;
+                let myStyle = 'mapbox://styles/mapbox/streets-v9';
+                let myLanguage = 'en';
+                let markerColor = "#3FB1CE";
+                let markerDraggable = true;
+                let mapRotation = true;
 
 
-            let map = new mapboxgl.Map({
-                container: 'map', // container id
-                style: myStyle,
-                center: [longitude, latitude], // starting position
-                zoom: myZoom // starting zoom
+                let map = new mapboxgl.Map({
+                    container: 'map', // container id
+                    style: myStyle,
+                    center: [longitude, latitude], // starting position
+                    zoom: myZoom // starting zoom
+                });
             });
-        });
-        //$(function () {
+                        //$(function () {
 
-        //    $("#slider-range-max").slider({
+                        //    $("#slider-range-max").slider({
 
-        //        range: "max",
+                        //        range: "max",
 
-        //        min: 0,
+                        //        min: 0,
 
-        //        max: 5,
+                        //        max: 5,
 
-        //        value: 1,
+                        //        value: 1,
 
-        //        slide: function (event, ui) {
+                        //        slide: function (event, ui) {
 
-        //            $("#amount").val(ui.value);
+                        //            $("#amount").val(ui.value);
 
-        //        }
+                        //        }
 
-        //    });
+                        //    });
 
-        //    $("#amount").val($("#slider-range-max").slider("value"));
+                        //    $("#amount").val($("#slider-range-max").slider("value"));
 
-        //});
+                        //});
 
-    </script>
+        </script>
 </body>
 </html>

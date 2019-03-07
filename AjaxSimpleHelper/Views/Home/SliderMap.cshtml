@@ -10,6 +10,10 @@
 }
 
 
+
+
+
+
 <h2>IconMap</h2>
 
 @using (Ajax.BeginForm(options))
@@ -78,11 +82,29 @@
     <div id="slider-range"></div>
 
 
+
+
+
+
+
+
+
+
+
     @section scripts
     {
         <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                    $(this).toggleClass('active');
+                });
+            });
+        </script>
     }
 
 
 }
+
 

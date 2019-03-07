@@ -1,6 +1,7 @@
 ﻿using AjaxSimpleHelper.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,6 +46,7 @@ namespace AjaxSimpleHelper.Controllers
 
         [HttpPost]
         public ActionResult IconMap(string id)
+             //public ActionResult IconMap(PostPlace id)
         {
             return View("IconMap", (object)id);
         }
@@ -52,9 +54,38 @@ namespace AjaxSimpleHelper.Controllers
         private readonly IDAL _dal = new EDAL();
         private readonly Library _ctx = new Library();
 
-        public ActionResult OrderedPlaces(string id)
+        //public ActionResult OrderedPlaces(string id)
+        public ActionResult OrderedPlaces(PostPlace place)
         {
-            var icons = _dal.GetDBPlacesByIcon(id); 
+            ICollection<DBPlace> icons;
+            string id = place.id;
+
+            if (id!=null)
+            {
+                String[] words = place.slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                words = words.Where(val => val != "-").ToArray();
+
+                List<string> times = new List<string>();
+
+                foreach (var item in words)
+                {
+                    int pos = item.IndexOf(":00");
+                    times.Add(item.Remove(pos));
+                }
+                 icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
+
+            }
+            else
+            {
+                icons = _dal.GetDBPlacesByAllParams(id, place.OpenTime, place.CloseTime, place.Rate);
+            }
+           
+
+            
+
+
+           
+            // var icons = _dal.GetDBPlacesByIcon(id); 
             //var icons = _ctx.DBPlaces;
 
             //if (!String.IsNullOrEmpty(id) && id != "all")
@@ -84,6 +115,20 @@ namespace AjaxSimpleHelper.Controllers
             }
 
             return null;
+        }
+
+        [HttpGet]
+        public ActionResult SliderMap()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult SliderMap(string id)
+        //public ActionResult IconMap(PostPlace id)
+        {
+            return View("SliderMap", (object)id);
         }
 
 
