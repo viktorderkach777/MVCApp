@@ -12,5 +12,6 @@ namespace AjaxSimpleHelper.Models
         public string CloseTime { get; set; }
         public string Rate { get; set; }
         public string slider { get; set; }
+        public string Counter { get; set; }  
     }
 }

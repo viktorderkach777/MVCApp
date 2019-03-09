@@ -60,6 +60,15 @@ namespace AjaxSimpleHelper.Controllers
             ICollection<DBPlace> icons;
             string id = place.id;
 
+            if (place.Counter==null)
+            {
+                place.Counter = "1";
+            }
+            else
+            {
+                place.Counter += "2";
+            }
+
             if (id!=null)
             {
                 String[] words = place.slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -142,6 +151,19 @@ namespace AjaxSimpleHelper.Controllers
         public ActionResult Weather(string id)
         {
             return View("Weather", (object)id);
+        }
+
+
+        [HttpGet]
+        public ActionResult Temp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Temp(string id)
+        {
+            return View("Temp", (object)id);
         }
 
     }
