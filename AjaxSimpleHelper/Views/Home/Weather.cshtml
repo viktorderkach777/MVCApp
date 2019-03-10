@@ -61,58 +61,183 @@
 
 
 @*<!DOCTYPE html>
-<html>
-<head>*@
-    @*<meta charset='utf-8' />
+    <html>
+    <head>*@
+@*<meta charset='utf-8' />
     <title>Display a map</title>*@
-    @*<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />*@
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: white;
-        }
+@*<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />*@
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
 
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
+<style>
+    /*body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }*/
+
+    #map {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        width: 120%;
+        height: 80%;
+    }
+
+    .mapboxgl-popup {
+        max-width: 200px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .mapboxgl-popup-content a {
+        color: blue;
+    }
+
+    a:hover {
+        color: purple;
+    }
+
+
+
+</style>
 @*</head>
-<body>*@
+    <body>*@
 
-    <div id='map'></div>
-    <script>
+
+
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id='map' data-counter="0"></div>
+</div>
+
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+                //$(".mapboxgl-canvas").attr("width", "100%")
+            });
+        });
+
+
+
+
+    </script>
+}
+
+
+<script>
+
+
+        //$(document).ready(function () {
+        //    $('#sidebarCollapse').on('click', function () {
+        //        $('#sidebar').toggleClass('active');
+        //        $(this).toggleClass('active');
+        //    });
+        //});
+
+
         //mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
-        let placeType = "city ";
-        let cityName = "Rivne";
-        let marker = null;
-        let markerArray = [];
-        let coordX = null;
-        let coordY = null;
-        let markerCenterX = null;
-        let markerCenterY = null;
-        let longitude = 26.25;
-        let latitude = 50.61;
-        let myZoom = 6;
-        let myStyle = 'mapbox://styles/mapbox/streets-v9';
-        let myLanguage = 'en';
-        let markerColor = "#3FB1CE";
-        let markerDraggable = true;
-        let mapRotation = true;
+        //let placeType = "city ";
+        //let cityName = "Rivne";
+        //let marker = null;
+        //let markerArray = [];
+        //let coordX = null;
+        //let coordY = null;
+        //let markerCenterX = null;
+        //let markerCenterY = null;
+        //let longitude = 26.25;
+        //let latitude = 50.61;
+        //let myZoom = 6;
+        //let myStyle = 'mapbox://styles/mapbox/streets-v9';
+        //let myLanguage = 'en';
+        //let markerColor = "#3FB1CE";
+        //let markerDraggable = true;
+        //let mapRotation = true;
 
 
-        //let map = new mapboxgl.Map({
+
+        //let TouristMap = new mapboxgl.Map({
         //    container: 'map', // container id
         //    style: myStyle,
         //    center: [longitude, latitude], // starting position
         //    zoom: myZoom // starting zoom
         //});
-    </script>
+
+        //TouristMap.getCanvas().style.cursor = 'pointer';
+
+        //function mapOn(placeName) {
+        //    TouristMap.on('click', placeName, function (e) {
+        //        var coordinates = e.features[0].geometry.coordinates.slice();
+        //        var description = e.features[0].properties.description;
+
+        //        // Ensure that if the map is zoomed out such that multiple
+        //        // copies of the feature are visible, the popup appears
+        //        // over the copy being pointed to.
+        //        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        //            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        //        }
+
+        //        new mapboxgl.Popup()
+        //            .setLngLat(coordinates)
+        //            .setHTML(description)
+        //            .addTo(TouristMap);
+        //    });
+        //}
+
+        //function SetStars(stars) {
+        //    let text = '';
+
+        //    for (let i = 0; i < 5; i++) {
+        //        if (i <= stars - 1) {
+        //            text = text + '<span class="fa fa-star checked"></span>';
+        //        }
+        //        else {
+        //            text = text + '<span class="fa fa-star"></span>';
+        //        }
+        //    }
+        //    return text;
+        //}
+</script>
 
 @*</body>
-</html>*@
+    </html>*@

@@ -154,6 +154,39 @@ namespace AjaxSimpleHelper.Controllers
         }
 
 
+
+        public JsonResult JsonPlaces(PostPlace place)
+        {
+            ICollection<DBPlace> icons;
+            string id = place.id;
+            
+
+            if (id != null)
+            {
+                String[] words = place.slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                words = words.Where(val => val != "-").ToArray();
+
+                List<string> times = new List<string>();
+
+                foreach (var item in words)
+                {
+                    int pos = item.IndexOf(":00");
+                    times.Add(item.Remove(pos));
+                }
+                icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
+
+            }
+            else
+            {
+                icons = _dal.GetDBPlacesByAllParams(id, place.OpenTime, place.CloseTime, place.Rate);
+            }
+           
+
+            return  Json(icons, JsonRequestBehavior.AllowGet);//PartialView(icons);
+        }
+
+
+
         [HttpGet]
         public ActionResult Temp()
         {

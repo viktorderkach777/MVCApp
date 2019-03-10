@@ -4,6 +4,28 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
+/*.glow {
+    font-family: cursive;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px yellowgreen, 0 0 40px yellowgreen, 0 0 50pxyellowgreen, 0 0 60px yellowgreen, 0 0 70px yellowgreen;
+    }
+
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px palegoldenrod, 0 0 40px palegoldenrod, 0 0 50px palegoldenrod, 0 0 60px palegoldenrod, 0 0 70px palegoldenrod, 0 0 80px palegoldenrod;
+    }
+}
+
+.fontcursive, a {
+    font-family: cursive;
+}*/
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
