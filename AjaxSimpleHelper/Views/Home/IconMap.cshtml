@@ -1,88 +1,81 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 
-    var options = new AjaxOptions()
-    {
-        Url = Url.Action("OrderedPlaces"),
-        UpdateTargetId = "tablebody"
-
-    };
 }
 
+<style>
 
-<h2>IconMap</h2>
-
-@using (Ajax.BeginForm(options))
-{
-    <table>
-        <thead cellspacing="5">
-            <tr>
-                <th> Id </th>
-                <th> Name </th>
-                <th> LinkRef </th>
-                <th> LinkText </th>
-                <th>  AboutPlace</th>
-                <th> OpenTime </th>
-                <th> CloseTime </th>
-                <th> Rate </th>
-                <th> Icon</th>
-                <th> Longitude </th>
-                <th> Latitude </th>
-            </tr>
-        </thead>
-        <tbody id="tablebody">
-            @Html.Action("OrderedPlaces", new { id = Model })
-        </tbody>
-    </table>
-
-    <p>
-        @Html.DropDownList("id",
-        new SelectList(new[] {"all", "theatre", "museum", "lodging" },
-        (Model ?? "all")))
-
-        @Html.DropDownList("OpenTime",
-       new SelectList(new[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"},
-       (Model ?? "8")))
-
-        @Html.DropDownList("CloseTime",
-      new SelectList(new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" },
-      (Model ?? "18")))
-
-        @Html.DropDownList("Rate",
-     new SelectList(new[] { "0", "1", "2", "3", "4", "5"},
-     (Model ?? "0")))
-
-    <p>
-        <label for="amount">Time range:</label>
-        <input type="text" id="amount" name="slider" readonly style="border:0; color:#f6931f; font-weight:bold;">
-    </p>
-
-    <div id="slider-range"></div>
-
-    <input type="submit" value="Get ordered places" />
-
-    </p>
-
-
-    @*<p>
-            <label for="amount">Rate:</label>
-            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-        </p>
-        <div id="slider-range-max"></div>*@
-
-    <p>
-        <label for="amount">Time range:</label>
-        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-    </p>
-
-    <div id="slider-range"></div>
-
-
-    @section scripts
-    {
-        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    #map {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        width: 120%;
+        height: 80%;
     }
 
+    .mapboxgl-popup {
+        max-width: 200px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
 
+    .mapboxgl-popup-content a {
+        color: blue;
+    }
+
+    a:hover {
+        color: purple;
+    }
+</style>
+
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id='map' data-counter="0"></div>
+</div>
+
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+
+            });
+        });
+
+    </script>
 }
-

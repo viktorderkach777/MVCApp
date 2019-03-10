@@ -18,7 +18,6 @@ namespace AjaxSimpleHelper.Models
         public int Rate { get; set; }
         public string Icon { get; set; }
         public double Longitude { get; set; }
-        public double Latitude { get; set; }
-        public string Counter { get; set; } 
+        public double Latitude { get; set; }       
     }
 }

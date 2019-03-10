@@ -1,144 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/jqueryui-css")
-    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/jqueryui-css")  
     @Scripts.Render("~/bundles/modernizr")
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
 
 
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
-
-
-
-
-    @*<div class="wrapper">
-
-                <nav id="sidebar">
-                    <div class="sidebar-header">
-                        <h3>Bootstrap Sidebar</h3>
-                    </div>
-                    <ul class="list-unstyled components">
-                        <p>Dummy Heading</p>
-                        <li class="active">
-                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li>
-                                    <a href="#">Home 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Home 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Home 3</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">About</a>
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li>
-                                    <a href="#">Page 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 3</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled CTAs">
-                        <li>
-                            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                        </li>
-                        <li>
-                            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                        </li>
-                    </ul>
-                </nav>
-        </div>*@
-
-
-
-    @*<div id="content">*@  @*class="container body-content">*@
-    @*<nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="navbar-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-align-justify"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Page</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
-
-
-    @{
-
-
-        var options = new AjaxOptions()
-        {
-            Url = Url.Action("OrderedPlaces"),
-            UpdateTargetId = "tablebody",
-            OnSuccess = "OnSuccess"
-
-        };
-    }
-
 
     <style>
         .checked {
@@ -153,97 +34,19 @@
     <span class="wrapper">
 
         <nav id="sidebar">
-            <div class="sidebar-header">
-                @*<h3>Bootstrap Sidebar</h3>*@
+            <div class="sidebar-header">              
                 <h3 class="fontcursive"><sup>&copy;</sup>Tourist App</h3>
             </div>
 
-            <ul class="list-unstyled components">
-                @*<p>Dummy Heading</p>*@
-                @*<li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
+            <ul class="list-unstyled components">               
                 <li>
-
-                    <a href="#">
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </a>
+                    @Html.ActionLink("Home", "Index", "Home")
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </a>
+                    @Html.ActionLink("About", "About", "Home")
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                    </a>
-                </li>
-            </ul>
-        </li>*@
-                @*<li>
-            <a href="#">About</a>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
-            </ul>
-        </li>*@
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    @Html.ActionLink("Contact", "Contacts", "Home")
                 </li>
             </ul>
 
@@ -256,32 +59,10 @@
                 </li>
             </ul>*@
 
-            @*@using (Ajax.BeginForm(options))*@
-            @*@using (Ajax.BeginForm("OrderedPlaces", new AjaxOptions() { UpdateTargetId = "tablebody", OnSuccess = "OnSuccess" }))*@
+          
 
             @using (Ajax.BeginForm("JsonPlaces", new AjaxOptions() { OnSuccess = "OnSuccess" }))
-            {
-
-               
-
-               
-
-               
-                    @*<br>
-                    <label for="id">
-                        <span style="text-align:left; margin:10%;">
-                            Icon:
-                            </span>
-                            @Html.DropDownList("id",
-            new SelectList(new[] { "all", "theatre", "museum", "lodging" },
-            (Model ?? "all")))
-                    </label>*@                  
-                   
-
-               
-
-
-
+            {     
                 <ul class="list-unstyled components">
 
                     <li class="active">
@@ -313,11 +94,6 @@
                             </li>                           
                         </ul>
                     </li>
-
-
-
-
-
 
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
@@ -384,89 +160,13 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-
-
-                    @*<li class="active">
-                      
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Time range</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">
-                                    <p style="width:80%; margin:auto; text-align:center;">
-                                      
-                                        <input type="text" id="amount" name="slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
-                                    </p>
-                                    <br />
-                                    <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>*@
+                    </li>                   
                 </ul>
-
-
-                @*<br />
-                <br />
-                <div style="width:80%; margin:auto; text-align:center;">
-                    <input type="submit" value="Get ordered places" class="btn btn-primary" />
-                </div>*@
-
-
-                @*<div style="text-align:center;">
-                <br>
-                <label for="Rate">Rate:</label>
-                <br>
-                @Html.RadioButton("Rate", "0")
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span> <br />
-                @Html.RadioButton("Rate", "1")
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span><br />
-                @Html.RadioButton("Rate", "2")
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span> <br />
-                @Html.RadioButton("Rate", "3", true)
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span><br />
-                @Html.RadioButton("Rate", "4", true)
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span><br />
-                @Html.RadioButton("Rate", "5", true)
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span><br />
-            </div>*@
-               
-
-                @*@Html.HiddenFor(p=> )*@
-
-
-
-
-
 
                 <p style="width:80%; margin:auto; text-align:center;  font-family: cursive; color:white;">
                 <label for="amount" class="range-label">Time range:</label>
                 <br />
-                <input type="text" id="amount" name="slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
+                <input type="text" id="amount" name="Slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
             </p>
             <br />
             <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
@@ -475,15 +175,8 @@
             <div style="width:80%; margin:auto; text-align:center;">
                 <input type="submit" value="Get ordered places" class="btn btn-primary" />
             </div>
-
-
             }
         </nav>
-
-
-
-
-
 
         @RenderBody()
     </span>
@@ -492,7 +185,7 @@
     <footer>
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>
-    @*</div>*@
+  
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -501,23 +194,12 @@
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
-        let placeType = "city ";
-        let cityName = "Rivne";
-        let marker = null;
-        let markerArray = [];
-        let coordX = null;
-        let coordY = null;
-        let markerCenterX = null;
-        let markerCenterY = null;
+       
         let longitude = 26.25;
         let latitude = 50.61;
         let myZoom = 13.15;
         let myStyle = 'mapbox://styles/mapbox/streets-v10';
-        let myLanguage = 'en';
-        let markerColor = "#3FB1CE";
-        let markerDraggable = true;
-        let mapRotation = true;       
-
+       
 
         let TouristMap = new mapboxgl.Map({
             container: 'map', // container id
@@ -532,6 +214,15 @@
         }), 'top-left');
 
         TouristMap.getCanvas().style.cursor = 'pointer';
+
+        $('input:radio[name="id"]').change(
+            function () {
+                if ($(this).is(':checked') && $(this).val() == 'all') {
+                    // append goes here
+                    console.log("fhjgjh");                   
+                }
+            });
+
 
         function mapOn(placeName) {
             TouristMap.on('click', placeName, function (e) {
@@ -567,16 +258,9 @@
         }
 
         function OnSuccess(data) {
-
-            //alert("Запрос был успешно выполнен. Получены следующие данные: \n" + data);
+           
             console.log(data);
-
-            //let counter = +$('#map').attr("data-counter");
-            //console.log(counter++);
-            //$('#map').attr("data-counter", counter);
-
             let arr = [];
-
             let counter = +$('#map').attr("data-counter");
 
             for (let j = 0; j < data.length; j++) {
@@ -638,7 +322,6 @@
         }
 
 
-
         $(function () {
             $("#slider-range").slider({
                 range: true,
@@ -652,37 +335,7 @@
             $("#amount").val(" " + $("#slider-range").slider("values", 0) + ":00 - " +
                 + $("#slider-range").slider("values", 1) + ":00");
         });
-
-
-
-        //$(document).ready(function () {
-
-        //    let placeType = "city ";
-        //    let cityName = "Rivne";
-        //    let marker = null;
-        //    let markerArray = [];
-        //    let coordX = null;
-        //    let coordY = null;
-        //    let markerCenterX = null;
-        //    let markerCenterY = null;
-        //    let longitude = 26.25;
-        //    let latitude = 50.61;
-        //    let myZoom = 6;
-        //    let myStyle = 'mapbox://styles/mapbox/streets-v9';
-        //    let myLanguage = 'en';
-        //    let markerColor = "#3FB1CE";
-        //    let markerDraggable = true;
-        //    let mapRotation = true;
-
-        //    // mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
-
-        //    //let map = new mapboxgl.Map({
-        //    //    container: 'map', // container id
-        //    //    style: myStyle,
-        //    //    center: [longitude, latitude], // starting position
-        //    //    zoom: myZoom // starting zoom
-        //    //});
-        //});
+        
     </script>
 </body>
 </html>

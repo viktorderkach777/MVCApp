@@ -24,16 +24,18 @@ namespace AjaxSimpleHelper.Controllers
         }
 
 
-        public ActionResult OrderedProducts(string id)
+        public ActionResult About()
         {
-            var orders = OrdersDb.GetOrders;
+            ViewBag.Message = "Your application description page.";
 
-            if (!String.IsNullOrEmpty(id) && id!="All")
-            {
-                orders = orders.Where(o => o.Customer == id);
-            }
+            return View();
+        }
 
-            return PartialView(orders);
+        public ActionResult Contacts()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
 
 
@@ -45,125 +47,22 @@ namespace AjaxSimpleHelper.Controllers
 
 
         [HttpPost]
-        public ActionResult IconMap(string id)
-             //public ActionResult IconMap(PostPlace id)
+        public ActionResult IconMap(string id)            
         {
             return View("IconMap", (object)id);
         }
 
-        private readonly IDAL _dal = new EDAL();
-        private readonly Library _ctx = new Library();
-
-        //public ActionResult OrderedPlaces(string id)
-        public ActionResult OrderedPlaces(PostPlace place)
-        {
-            ICollection<DBPlace> icons;
-            string id = place.id;
-
-            if (place.Counter==null)
-            {
-                place.Counter = "1";
-            }
-            else
-            {
-                place.Counter += "2";
-            }
-
-            if (id!=null)
-            {
-                String[] words = place.slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                words = words.Where(val => val != "-").ToArray();
-
-                List<string> times = new List<string>();
-
-                foreach (var item in words)
-                {
-                    int pos = item.IndexOf(":00");
-                    times.Add(item.Remove(pos));
-                }
-                 icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
-
-            }
-            else
-            {
-                icons = _dal.GetDBPlacesByAllParams(id, place.OpenTime, place.CloseTime, place.Rate);
-            }
-           
-
-            
-
-
-           
-            // var icons = _dal.GetDBPlacesByIcon(id); 
-            //var icons = _ctx.DBPlaces;
-
-            //if (!String.IsNullOrEmpty(id) && id != "all")
-            //{
-            //    icons = _dal..Where(o => o.Icon == id).ToList();
-            //}
-
-            //if (!String.IsNullOrEmpty(id) && id != "all")
-            //{
-            //    icons = _ctx.DBPlaces.Where(o => o.Icon == id);
-            //}
-
-            return PartialView(icons);
-        }
-
-        public ICollection<DBPlace> GetDBPlacesByIcon(string icon)
-        {
-            if (!String.IsNullOrEmpty(icon))
-            {
-
-                if (icon == "all")
-                {
-                    return _ctx.DBPlaces.ToList();
-                }
-
-                return _ctx.DBPlaces.Where(p => p.Icon == icon).ToList();
-            }
-
-            return null;
-        }
-
-        [HttpGet]
-        public ActionResult SliderMap()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult SliderMap(string id)
-        //public ActionResult IconMap(PostPlace id)
-        {
-            return View("SliderMap", (object)id);
-        }
-
-
-        [HttpGet]
-        public ActionResult Weather()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Weather(string id)
-        {
-            return View("Weather", (object)id);
-        }
-
+        private readonly IDAL _dal = new EDAL();      
 
 
         public JsonResult JsonPlaces(PostPlace place)
         {
             ICollection<DBPlace> icons;
-            string id = place.id;
-            
+            string id = place.id;            
 
             if (id != null)
             {
-                String[] words = place.slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] words = place.Slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 words = words.Where(val => val != "-").ToArray();
 
                 List<string> times = new List<string>();
@@ -173,31 +72,16 @@ namespace AjaxSimpleHelper.Controllers
                     int pos = item.IndexOf(":00");
                     times.Add(item.Remove(pos));
                 }
-                icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
 
+                icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
             }
             else
             {
                 icons = _dal.GetDBPlacesByAllParams(id, place.OpenTime, place.CloseTime, place.Rate);
-            }
-           
+            }           
 
-            return  Json(icons, JsonRequestBehavior.AllowGet);//PartialView(icons);
-        }
-
-
-
-        [HttpGet]
-        public ActionResult Temp()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Temp(string id)
-        {
-            return View("Temp", (object)id);
-        }
+            return  Json(icons, JsonRequestBehavior.AllowGet);
+        }        
 
     }
 }
