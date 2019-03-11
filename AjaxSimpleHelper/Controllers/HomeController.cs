@@ -18,9 +18,9 @@ namespace AjaxSimpleHelper.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(string id)
+        public ActionResult Index(string Id)
         {
-            return View("Index", (object)id);
+            return View("Index", (object)Id);
         }
 
 
@@ -47,9 +47,9 @@ namespace AjaxSimpleHelper.Controllers
 
 
         [HttpPost]
-        public ActionResult IconMap(string id)            
+        public ActionResult IconMap(string Id)            
         {
-            return View("IconMap", (object)id);
+            return View("IconMap", (object)Id);
         }
 
         private readonly IDAL _dal = new EDAL();      
@@ -58,10 +58,10 @@ namespace AjaxSimpleHelper.Controllers
         public JsonResult JsonPlaces(PostPlace place)
         {
             ICollection<DBPlace> icons;
-            string id = place.id;            
+            string Id = place.Id;            
 
-            if (id != null)
-            {
+            //if (Id != null)
+            //{
                 string[] words = place.Slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 words = words.Where(val => val != "-").ToArray();
 
@@ -73,12 +73,12 @@ namespace AjaxSimpleHelper.Controllers
                     times.Add(item.Remove(pos));
                 }
 
-                icons = _dal.GetDBPlacesByAllParams(id, times[0], times[1], place.Rate);
-            }
-            else
-            {
-                icons = _dal.GetDBPlacesByAllParams(id, place.OpenTime, place.CloseTime, place.Rate);
-            }           
+                icons = _dal.GetDBPlacesByAllParams(Id, times[0], times[1], place.Rate);
+            //}
+            //else
+            //{
+            //    icons = _dal.GetDBPlacesByAllParams(Id, "12", "15", place.Rate);
+            //}
 
             return  Json(icons, JsonRequestBehavior.AllowGet);
         }        
