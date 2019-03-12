@@ -1,47 +1,800 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryui-css")
     @Scripts.Render("~/bundles/modernizr")
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
+
+
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        @Html.ActionLink("BankOfNewYork", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
-                </li>
-            </ul>
-            <ul class="list-inline">
-                @Html.Partial("_PartialLoginView")
-            </ul>
-        </div>
-    </nav>
+    <style>
+        .checked {
+            color: orange;
+        }
 
-    <div class="container body-content">
+        .fontcursive, a {
+            font-family: cursive;
+        }
+    </style>
+
+    <span class="wrapper">
+
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3 class="fontcursive"><sup>&copy;</sup>Tourist App</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("About", "About", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("Contact", "Contact", "Home")
+                </li>
+            </ul>
+
+            @*<ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                    </li>
+                    <li>
+                        <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                    </li>
+                </ul>*@
+
+
+
+            @using (Ajax.BeginForm("JsonPlaces", new AjaxOptions() { OnSuccess = "OnSuccess" }))
+            {
+                <ul class="list-unstyled components">
+
+                    <li class="active">
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Icon</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#" style="margin-left:20%;">
+                                    @Html.RadioButton("id", "all", true)
+                                    <span>all</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="margin-left:20%;">
+                                    @Html.RadioButton("id", "theatre")
+                                    <span>theatre</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="margin-left:20%;">
+                                    @Html.RadioButton("id", "museum")
+                                    <span>museum</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="margin-left:20%;">
+                                    @Html.RadioButton("id", "lodging")
+                                    <span>lodging</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "0", true)
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "1")
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span><br />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "2")
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span> <br />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "3")
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span><br />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "4")
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span><br />
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                    @Html.RadioButton("Rate", "5")
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span><br />
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p style="width:80%; margin:auto; text-align:center;  font-family: cursive; color:white;">
+                    <label for="amount" class="range-label">Time range:</label>
+                    <br />
+                    <input type="text" id="amount" name="Slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
+                </p>
+                <br />
+                <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
+                <br />
+                <br />
+                <div style="width:80%; margin:auto; text-align:center;">
+                    <input type="submit" value="Get ordered places" class="btn btn-primary" />
+                </div>
+            }
+        </nav>
+
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </span>
+    <br>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/mySideBar")
+    @Scripts.Render("~/bundles/unobtrusive-ajax")
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
+
+        let longitude = 26.25;
+        let latitude = 50.61;
+        let myZoom = 13.15;
+        let myStyle = 'mapbox://styles/mapbox/streets-v10';
+
+
+        let TouristMap = new mapboxgl.Map({
+            container: 'map', // container id
+            style: myStyle,
+            center: [longitude, latitude], // starting position
+            zoom: myZoom // starting zoom
+        });
+
+        //TouristMap.addControl(new MapboxDirections({
+        //    accessToken: mapboxgl.accessToken,
+        //    unit: 'metric'
+        //}), 'top-left');
+
+        //TouristMap.getCanvas().style.cursor = 'pointer';
+
+        //$('input:radio[name="id"]').change(
+        //    function () {
+        //        if ($(this).is(':checked') && $(this).val() == 'all') {
+        //            // append goes here
+        //            console.log("fhjgjh");
+        //        }
+        //    });
+
+        let directs = new MapboxDirections({
+            accessToken: mapboxgl.accessToken,
+            unit: 'metric'
+        })
+
+        //TouristMap.addControl(directs, 'top-left');
+
+        TouristMap.getCanvas().style.cursor = 'pointer';
+        //TouristMap.getCanvas().style.
+
+        $('input:radio[name="id"]').change(
+            function () {
+                if ($(this).is(':checked') && $(this).val() == 'all') {
+                    // append goes here
+                    console.log("all");
+                    //TouristMap.removeControl(directs);
+                    try {
+                        console.log("try all");
+                        TouristMap.removeControl(directs);
+                    }
+                    catch (e) {
+
+                    }
+
+                    //TouristMap.removeControl(directs);
+                }
+
+                if ($(this).is(':checked') && $(this).val() == 'museum') {
+                    // append goes here
+                    console.log("museum");
+
+                    try {
+                        console.log("try museum");
+                        TouristMap.addControl(directs, 'top-left');
+                    }
+                    catch (e) {
+
+                    }
+
+                    //TouristMap.removeControl(directs);
+                }
+            });
+
+
+        function mapOn(placeName) {
+            TouristMap.on('click', placeName, function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(TouristMap);
+            });
+        }
+
+        function SetStars(stars) {
+            let text = '';
+
+            for (let i = 0; i < 5; i++) {
+                if (i <= stars - 1) {
+                    text = text + '<span class="fa fa-star checked"></span>';
+                }
+                else {
+                    text = text + '<span class="fa fa-star"></span>';
+                }
+            }
+            return text;
+        }
+
+        function OnSuccess(data) {
+
+            console.log(data);
+            let arr = [];
+            let counter = +$('#map').attr("data-counter");
+
+            for (let j = 0; j < data.length; j++) {
+                let arrayElem = data[j];
+
+                let descr = `<strong>${arrayElem.Name}</strong><p>${arrayElem.LinkRef}${arrayElem.LinkText}</a>${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
+                                    ${SetStars(arrayElem.Rate)}`;
+
+                let ob = {
+                    "type": "Feature",
+                    "properties": {
+                        "description": descr,
+                        "icon": arrayElem.Icon,
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [arrayElem.Longitude, arrayElem.Latitude]
+                    }
+                };
+
+                arr.push(ob);
+            }
+
+            if (counter > 0) {
+
+                TouristMap.removeLayer('places' + counter);
+            }
+
+            counter++;
+            let placeName = 'places' + counter;
+
+            let myLayer = {
+                "id": placeName,
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": arr
+                    }
+                },
+                "layout": {
+                    "icon-image": "{icon}-15",
+                    "icon-allow-overlap": true,
+                    'visibility': 'visible'
+                }
+            };
+
+            // Add a layer showing the places.
+            TouristMap.addLayer(myLayer);
+
+            // When a click event occurs on a feature in the places layer, open a popup at the
+            // location of the feature, with description HTML from its properties.
+            mapOn(placeName);
+
+            $('#map').attr("data-counter", counter);
+
+            console.log(myLayer);
+        }
+
+
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 24,
+                values: [8, 18],
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0] + ":00 - " + ui.values[1] + ":00");
+                }
+            });
+            $("#amount").val(" " + $("#slider-range").slider("values", 0) + ":00 - " +
+                + $("#slider-range").slider("values", 1) + ":00");
+        });
+
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+            @Html.ActionLink("BankOfNewYork", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    @Html.Partial("_PartialLoginView")
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
+@*//////////////////////////////////////*@
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/jqueryui-css")
+        @Scripts.Render("~/bundles/modernizr")
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
+
+
+    </head>
+    <body>
+
+        <style>
+            .checked {
+                color: orange;
+            }
+
+            .fontcursive, a {
+                font-family: cursive;
+            }
+        </style>
+
+        <span class="wrapper">
+
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3 class="fontcursive"><sup>&copy;</sup>Tourist App</h3>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("About", "About", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Contact", "Contacts", "Home")
+                    </li>
+                </ul>
+
+
+
+
+
+                @using (Ajax.BeginForm("JsonPlaces", new AjaxOptions() { OnSuccess = "OnSuccess" }))
+                {
+                    <ul class="list-unstyled components">
+
+                        <li class="active">
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Icon</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "all", true)
+                                        <span>all</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "theatre")
+                                        <span>theatre</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "museum")
+                                        <span>museum</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "lodging")
+                                        <span>lodging</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="active">
+                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "0", true)
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "1")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "2")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span> <br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "3")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "4")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "5")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span><br />
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="width:80%; margin:auto; text-align:center;  font-family: cursive; color:white;">
+                        <label for="amount" class="range-label">Time range:</label>
+                        <br />
+                        <input type="text" id="amount" name="Slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
+                    </p>
+                    <br />
+                    <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
+                    <br />
+                    <br />
+                    <div style="width:80%; margin:auto; text-align:center;">
+                        <input type="submit" value="Get ordered places" class="btn btn-primary" />
+                    </div>
+                }
+            </nav>
+
+            @RenderBody()
+        </span>
+        <br>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jqueryui")
+
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
+
+            let longitude = 26.25;
+            let latitude = 50.61;
+            let myZoom = 13.15;
+            let myStyle = 'mapbox://styles/mapbox/streets-v10';
+
+
+            let TouristMap = new mapboxgl.Map({
+                container: 'map', // container id
+                style: myStyle,
+                center: [longitude, latitude], // starting position
+                zoom: myZoom // starting zoom
+            });
+
+            TouristMap.addControl(new MapboxDirections({
+                accessToken: mapboxgl.accessToken,
+                unit: 'metric'
+            }), 'top-left');
+
+            TouristMap.getCanvas().style.cursor = 'pointer';
+
+            $('input:radio[name="id"]').change(
+                function () {
+                    if ($(this).is(':checked') && $(this).val() == 'all') {
+                        // append goes here
+                        console.log("fhjgjh");
+                    }
+                });
+
+
+            function mapOn(placeName) {
+                TouristMap.on('click', placeName, function (e) {
+                    var coordinates = e.features[0].geometry.coordinates.slice();
+                    var description = e.features[0].properties.description;
+
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                    }
+
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(description)
+                        .addTo(TouristMap);
+                });
+            }
+
+            function SetStars(stars) {
+                let text = '';
+
+                for (let i = 0; i < 5; i++) {
+                    if (i <= stars - 1) {
+                        text = text + '<span class="fa fa-star checked"></span>';
+                    }
+                    else {
+                        text = text + '<span class="fa fa-star"></span>';
+                    }
+                }
+                return text;
+            }
+
+            function OnSuccess(data) {
+
+                console.log(data);
+                let arr = [];
+                let counter = +$('#map').attr("data-counter");
+
+                for (let j = 0; j < data.length; j++) {
+                    let arrayElem = data[j];
+
+                    let descr = `<strong>${arrayElem.Name}</strong><p>${arrayElem.LinkRef}${arrayElem.LinkText}</a>${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
+                        ${SetStars(arrayElem.Rate)}`;
+
+                    let ob = {
+                        "type": "Feature",
+                        "properties": {
+                            "description": descr,
+                            "icon": arrayElem.Icon,
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [arrayElem.Longitude, arrayElem.Latitude]
+                        }
+                    };
+
+                    arr.push(ob);
+                }
+
+                if (counter > 0) {
+
+                    TouristMap.removeLayer('places' + counter);
+                }
+
+                counter++;
+                let placeName = 'places' + counter;
+
+                let myLayer = {
+                    "id": placeName,
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": arr
+                        }
+                    },
+                    "layout": {
+                        "icon-image": "{icon}-15",
+                        "icon-allow-overlap": true,
+                        'visibility': 'visible'
+                    }
+                };
+
+                // Add a layer showing the places.
+                TouristMap.addLayer(myLayer);
+
+                // When a click event occurs on a feature in the places layer, open a popup at the
+                // location of the feature, with description HTML from its properties.
+                mapOn(placeName);
+
+                $('#map').attr("data-counter", counter);
+
+                console.log(myLayer);
+            }
+
+
+            $(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 24,
+                    values: [8, 18],
+                    slide: function (event, ui) {
+                        $("#amount").val(ui.values[0] + ":00 - " + ui.values[1] + ":00");
+                    }
+                });
+                $("#amount").val(" " + $("#slider-range").slider("values", 0) + ":00 - " +
+                    + $("#slider-range").slider("values", 1) + ":00");
+            });
+
+        </script>
+    </body>
+    </html>*@
+

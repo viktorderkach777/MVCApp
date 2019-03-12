@@ -4,7 +4,67 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<style>
+
+
+    .register, .signIn {
+        color: #444;
+        border: 1px solid #CCC;
+        cursor: pointer;
+        vertical-align: middle;
+        padding: 5px;
+        text-align: center;
+    }
+
+    #mainFrameDiv {
+        border-style: solid;
+        border-width: 1px;
+    }
+
+
+    .register:active, .signIn:active {
+        color: red;
+    }
+
+    .register:hover, .signIn:hover {
+        border-bottom-color: coral;
+        border-bottom-width: 3px;
+    }
+
+    .selected-btn {
+        background: deepskyblue;
+        color: yellow;
+        border-bottom-color: coral;
+        border-bottom-width: 3px;
+    }
+
+    #submitButton {
+        text-align: center;
+        margin: 3%;
+        width: 30%;
+    }
+
+    .form-group {
+        margin: 3%;
+    }
+
+    .formalert {
+        text-align: center;
+    }
+
+
+    #formOfRegistration {
+        height: 800px;
+    }
+
+    #goForwardButton {
+        margin: 3%;
+        width: 30%;
+        visibility: hidden;
+    }
+</style>
+
+@*<h2>Login</h2>
 
 @using (Html.BeginForm())
 {
@@ -24,7 +84,7 @@
             @Html.DisplayNameFor(m => m.Password)
             @Html.EditorFor(m => m.Password)
         </div>
-               
+
 
         <div>
             <input type="submit" value="Log me Pls!" />
@@ -35,5 +95,89 @@
         </div>
 
     </div>
-}
+}*@
+
+
+<div class="container" id="formOfRegistration">
+    <h2>Fill the form please:</h2>
+
+    <div class="row" id="mainFrameDiv" style="background-color:honeydew;">
+        <div id="left" class="col-sm-6">
+            <span><sup>&copy;</sup>Tourist app helps to enjoy your travel or business trip.</span>
+        </div>
+        <div id="right" class="col-sm-6">
+
+            @*<div class="row">
+            <div id="singin_button" class="signIn container col-sm-6">
+                Sign In
+            </div>
+            <div id="register_button" class="register container col-sm-6">
+                Register
+            </div>
+        </div>*@
+            @*<form method="post" action="" name="registrationForm">*@
+            @using (Html.BeginForm())
+            {
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*<div class="form-group registration-form">
+                <label for="fullname">Full name</label>
+                <input type="text" class="form-control" id="fullname" name="first_name">
+            </div>
+            <div class="form-group singin-form">
+                <label for="usernameOrEmail">Username or email</label>
+                <input type="text" class="form-control" id="usernameOrEmail" name="user_name_email">
+            </div>
+            <div class="form-group registration-form">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="user_name">
+            </div>*@
+                <div class="form-group registration-form">
+                    @Html.DisplayNameFor(m => m.Email)
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="form-group registration-form">
+                    @Html.DisplayNameFor(m => m.Password)
+                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+
+               
+                @*<div class="form-group registration-form">
+                <label for="emailconfirmation">Email confirmation</label>
+                <input type="email" class="form-control" id="emailconfirmation" name="user_email_again">
+            </div>*@
+               
+                @*<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                </label>
+            </div>*@
+                <div class="form-group ">
+                    <input type="submit" value="Log me Pls!" class="btn btn-success"/>
+                </div>
+
+                <div class="form-group ">
+                    <input type="reset" value="Clear Form" class="btn btn-primary"/>
+                </div>
+
+
+
+                @*<div>
+                    <button type="submit" id="submitButton" class="btn btn-success" data-registred="0"></button>
+                    <button type="button" id="goForwardButton" class="btn btn-success">Go forward!</button>
+                    <div class="alert formalert">
+                        <strong id="alert_main_word"></strong> <span id="alert_message"></span>
+                    </div>
+                </div>*@
+
+            }
+          
+        </div>
+    </div>
+</div>
+
 
