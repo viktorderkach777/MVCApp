@@ -17,11 +17,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer
+namespace MVCApp
 {
-    public class MyDal : IMyDal
+    public class MyDal : IDAL
     {
-        private readonly DbContext ctx;
+        private readonly CustomContext ctx;
 
         public MyDal(DbContext ctx)
         {

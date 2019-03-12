@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
+
 namespace MVCApp
 {
     public class CustomContext : IdentityDbContext<CustomUser>
     {
         public CustomContext() :base("CustomConnectionString")
         {
-
+            Database.SetInitializer<CustomContext>(new CustomInitializer<CustomContext>());
         }
 
         public static CustomContext Create()
@@ -16,5 +17,7 @@ namespace MVCApp
         }
 
         public virtual DbSet<Account> Accounts{get; set;}
+
+        public virtual DbSet<DALPlace> DALPlaces { get; set; }
     }
 }
