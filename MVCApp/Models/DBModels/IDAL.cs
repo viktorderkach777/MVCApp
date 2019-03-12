@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MVCApp
 {
@@ -6,4 +7,6 @@ namespace MVCApp
     {
         ICollection<DALPlace> GetDBPlacesByAllParams(string icon, string openTime, string closeTime, string rate);
     }
+
+
 }

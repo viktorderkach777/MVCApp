@@ -15,6 +15,8 @@ namespace MVCApp
             this.bll = bll;
         }
 
+       // private readonly IDAL bll = new MyDal();
+
         [HttpGet]
         public ActionResult Index()
         {
