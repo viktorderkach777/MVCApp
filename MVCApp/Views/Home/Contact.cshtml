@@ -3,5 +3,40 @@
     ViewBag.Title = "Contact";
 }
 
-<h2>Contact</h2>
 
+
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="list-inline nav navbar-nav ml-auto">
+                    @Html.Partial("_PartialLoginView")
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="loading" style="display:none; font-weight:bold;">
+        <p style="color:blue;">Loading...</p>
+    </div>
+
+    <div id='map' data-counter="0"></div>
+</div>
+
+
+@section scripts
+    {
+    <script>
+        $('#forma').css('visibility', 'hidden');
+    </script>}

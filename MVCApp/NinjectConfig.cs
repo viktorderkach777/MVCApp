@@ -15,6 +15,9 @@ namespace MVCApp
             //2 ninject main functionality creation
             StandardKernel kernel = new StandardKernel(nm);
 
+            kernel.Unbind<ModelValidatorProvider>();
+            //kernel.AddBinding();
+
             //3 resolver for all registered dependencies
             NinjectDependencyResolver ndr = new NinjectDependencyResolver(kernel);
 

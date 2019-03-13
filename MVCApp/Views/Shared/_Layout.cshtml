@@ -30,6 +30,39 @@
         .fontcursive, a {
             font-family: cursive;
         }
+
+        .register, .signIn {
+            color: white;
+            border: 1px solid #CCC;
+            cursor: pointer;
+            vertical-align: middle;
+            padding: 5px;
+            text-align: center;
+            font-family: cursive;
+            font-size:small;
+        }
+
+        #mainFrameDiv {
+            border-style: solid;
+            border-width: 1px;
+        }
+
+
+        .register:active, .signIn:active {
+            color: red;
+        }
+
+        .register:hover, .signIn:hover {
+            border-bottom-color: #f6931f;
+            border-bottom-width: 3px;
+        }
+
+        .selected-btn {
+            background: #3bb2d0;
+            color: white;
+            border-bottom-color: #f6931f;
+            border-bottom-width: 3px;
+        }
     </style>
 
     <span class="wrapper">
@@ -51,132 +84,154 @@
                 </li>
             </ul>
 
-            @*<ul class="list-unstyled CTAs">
-                    <li>
-                        <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                    </li>
-                    <li>
-                        <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                    </li>
-                </ul>*@
+            
+
+            <div id="forma">
+
+                <ul class="list-unstyled CTAs">
+                    @*<li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            </li>
+            <li>
+                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            </li>*@
+                    <li style="width:80%; margin:auto; text-align:center;">
+
+                        <div class="row">
+                            <div id="singin_button" class="signIn container col-sm-6 ">
+                                Navigator +
+                            </div>
+                            <div id="register_button" class="register container col-sm-6 selected-btn">
+                                Navigator -
+                            </div>
+                        </div>
 
 
-
-            @using (Ajax.BeginForm("JsonPlaces", new AjaxOptions() { OnSuccess = "OnSuccess" }))
-            {
-                <ul class="list-unstyled components">
-
-                    <li class="active">
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Icon</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#" style="margin-left:20%;">
-                                    @Html.RadioButton("id", "all", true)
-                                    <span>all</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="margin-left:20%;">
-                                    @Html.RadioButton("id", "theatre")
-                                    <span>theatre</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="margin-left:20%;">
-                                    @Html.RadioButton("id", "museum")
-                                    <span>museum</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="margin-left:20%;">
-                                    @Html.RadioButton("id", "lodging")
-                                    <span>lodging</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "0", true)
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "1")
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span><br />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "2")
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span> <br />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "3")
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span><br />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "4")
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span><br />
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#" style="width:80%; margin:auto; text-align:center;">
-                                    @Html.RadioButton("Rate", "5")
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span><br />
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
 
-                <p style="width:80%; margin:auto; text-align:center;  font-family: cursive; color:white;">
-                    <label for="amount" class="range-label">Time range:</label>
+                @using (Ajax.BeginForm("JsonPlaces", new AjaxOptions()
+                {
+                    OnSuccess = "OnSuccess",
+                    LoadingElementId = "loading",
+                    LoadingElementDuration = 500
+                }))
+                {
+                    <ul class="list-unstyled components">
+
+                        <li class="active">
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Icon</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "all", true)
+                                        <span>all</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "theatre")
+                                        <span>theatre</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "museum")
+                                        <span>museum</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="margin-left:20%;">
+                                        @Html.RadioButton("id", "lodging")
+                                        <span>lodging</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="active">
+                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Rating</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "0", true)
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "1")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "2")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span> <br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "3")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "4")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span><br />
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="width:80%; margin:auto; text-align:center;">
+                                        @Html.RadioButton("Rate", "5")
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span><br />
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="width:80%; margin:auto; text-align:center;  font-family: cursive; color:white;">
+                        <label for="amount" class="range-label">Time range:</label>
+                        <br />
+                        <input type="text" id="amount" name="Slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
+                    </p>
                     <br />
-                    <input type="text" id="amount" name="Slider" readonly style="border:0; color:#f6931f; font-weight:bold; width:80%; margin:auto; text-align:center; " class="custom-range">
-                </p>
-                <br />
-                <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
-                <br />
-                <br />
-                <div style="width:80%; margin:auto; text-align:center;">
-                    <input type="submit" value="Get ordered places" class="btn btn-primary" />
-                </div>
-            }
+                    <div id="slider-range" style="width:80%; margin:auto; text-align:center;"></div>
+                    <br />
+                    <br />
+                    <div style="width:80%; margin:auto; text-align:center;">
+                        <input type="submit" value="Get ordered places" class="btn btn-primary" />
+                    </div>
+
+                }
+            </div>
         </nav>
 
         @RenderBody()
@@ -196,6 +251,8 @@
     @Scripts.Render("~/bundles/unobtrusive-ajax")
 
     <script>
+        $('#forma').css('visibility', 'visible');       
+
         mapboxgl.accessToken = 'pk.eyJ1IjoiZGVya2FjaCIsImEiOiJjanFjdWFzeGozejZnNDNvYmpsbXR1azJzIn0.03a1jcE5orWtncfaDCxuPA';
 
         let longitude = 26.25;
@@ -235,6 +292,40 @@
 
         TouristMap.getCanvas().style.cursor = 'pointer';
         //TouristMap.getCanvas().style.
+
+        $('.register').click(function (e) {
+
+            let jObj = $(this);
+
+            jObj.parent().children().removeClass("selected-btn");
+            jObj.addClass("selected-btn");
+
+            try {
+                console.log("try all");
+                TouristMap.removeControl(directs);
+            }
+            catch (e) {
+
+            }
+
+        });
+
+        $('.signIn').click(function (e) {
+
+            let jObj = $(this);
+
+            jObj.parent().children().removeClass("selected-btn");
+            jObj.addClass("selected-btn");
+
+            try {
+                console.log("try museum");
+                TouristMap.addControl(directs, 'top-left');
+            }
+            catch (e) {
+
+            }
+
+        });
 
         $('input:radio[name="id"]').change(
             function () {

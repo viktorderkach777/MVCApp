@@ -8,16 +8,16 @@ namespace MVCApp.Models.ViewModels
 {
     public class RegisterModel
     {
-        //[Required]      
+        [Required]
         public string Email { get; set; }
 
-        //[Required]
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //[Required]
+        [Required]
         [DataType(DataType.Password)]
-        //[Compare("Password", ErrorMessage="Passwords are not the same!!!")]
+        [Compare("Password", ErrorMessage = "Passwords are not the same!!!")]
         public string PasswordConfirm { get; set; }
 
 
@@ -25,7 +25,7 @@ namespace MVCApp.Models.ViewModels
         //public DateTime LastVisit { get; set; }
 
 
-        //[Required]      
+        [Required]
         public string SkinColor { get; set; }
     }
 }
