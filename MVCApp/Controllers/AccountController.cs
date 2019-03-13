@@ -94,10 +94,16 @@ namespace MVCApp.Controllers
                         IsPersistent = true
                     }, result);
 
-                    if (String.IsNullOrEmpty(returnUrl))
+                    if (customUser.UserName == "x@x.ua" && customUser.PasswordHash == "AOCNqmW/55SvQ5uoWlffW0Ibikf6F8JywhGnRXbgzPc1DaWUgkGc5FYYqien+qvH+w==")
                     {
-                        returnResult = RedirectToAction("Index", "Home");
-                        //return RedirectToAction("Index", "Home");
+                        returnResult = RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    else if (String.IsNullOrEmpty(returnUrl))
+                    {                        
+                       
+                            returnResult = RedirectToAction("Index", "Home");                    
+                       
+                       
                     }
                     else
                     {

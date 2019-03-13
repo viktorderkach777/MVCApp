@@ -15,6 +15,7 @@ namespace MVCApp
 
             routes.MapRoute(
                 name: "Default",
+                namespaces: new string[] { "MVCApp" },
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );

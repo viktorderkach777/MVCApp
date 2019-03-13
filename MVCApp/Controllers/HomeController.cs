@@ -8,14 +8,14 @@ namespace MVCApp
 {
     public class HomeController : Controller
     {
-        //private readonly IDAL bll;
+        private readonly IDAL bll;
 
-        //public HomeController(IDAL bll)
-        //{
-        //    this.bll = bll;
-        //}
+        public HomeController(IDAL bll)
+        {
+            this.bll = bll;
+        }
 
-        private readonly IDAL bll = new MyDal();
+        //private readonly IDAL bll = new MyDal();
 
         [HttpGet]
         public ActionResult Index()
@@ -69,6 +69,140 @@ namespace MVCApp
         {
 
             return View();
+        }
+
+        public ActionResult Table()
+        {
+                var myTasks = bll.GetDBPlaces().Select(p =>new GetPlace() {
+                    Id = p.Id,
+                    AboutPlace = p.AboutPlace,
+                    CloseTime = p.CloseTime,
+                    Icon = p.Icon,
+                    Latitude = p.Latitude,
+                    LinkRef = p.LinkRef,
+                    LinkText = p.LinkText,
+                    Longitude = p.Longitude,
+                    Name = p.Name,
+                    OpenTime = p.OpenTime,
+                    Rate = p.Rate                    
+                }).ToList();
+                return View(myTasks);            
+        }
+
+        [HttpGet]
+
+        public ActionResult Create()
+        {        
+
+            return View();
+        }
+
+        [HttpPost]
+
+        public ActionResult Create(GetPlace p)
+        {
+            if (ModelState.IsValid)
+            {
+                //bll.MyTasks.Add(myTask);
+                //db.SaveChanges();
+                DALPlace dp = new DALPlace()
+                {
+                    Id = p.Id,
+                    AboutPlace = p.AboutPlace,
+                    CloseTime = p.CloseTime,
+                    Icon = p.Icon,
+                    Latitude = p.Latitude,
+                    LinkRef = p.LinkRef,
+                    LinkText = p.LinkText,
+                    Longitude = p.Longitude,
+                    Name = p.Name,
+                    OpenTime = p.OpenTime,
+                    Rate = p.Rate
+                };
+
+                bool IsSave = bll.AddPlace(dp);
+
+                if (IsSave)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(p);
+                }               
+            }
+
+                return View(p);
+        }
+
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            DALPlace p = bll.GetDBPlacesById(id.ToString());
+
+            if (p != null)
+            {
+                GetPlace dp = new GetPlace()
+                {
+                    Id = p.Id,
+                    AboutPlace = p.AboutPlace,
+                    CloseTime = p.CloseTime,
+                    Icon = p.Icon,
+                    Latitude = p.Latitude,
+                    LinkRef = p.LinkRef,
+                    LinkText = p.LinkText,
+                    Longitude = p.Longitude,
+                    Name = p.Name,
+                    OpenTime = p.OpenTime,
+                    Rate = p.Rate
+                };
+
+                return View(dp);
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(GetPlace p)
+        {
+            if (ModelState.IsValid)
+            {    
+
+                if (p!=null)
+                {
+                    DALPlace dp = new DALPlace()
+                    {
+                        Id = p.Id,
+                        AboutPlace = p.AboutPlace,
+                        CloseTime = p.CloseTime,
+                        Icon = p.Icon,
+                        Latitude = p.Latitude,
+                        LinkRef = p.LinkRef,
+                        LinkText = p.LinkText,
+                        Longitude = p.Longitude,
+                        Name = p.Name,
+                        OpenTime = p.OpenTime,
+                        Rate = p.Rate
+                    };
+
+                    bool IsEdit = bll.EditPlace(dp);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(p);
+                }
+            }
+
+            return View(p);
         }
     }
 }

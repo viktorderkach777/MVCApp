@@ -403,7 +403,9 @@
             for (let j = 0; j < data.length; j++) {
                 let arrayElem = data[j];
 
-                let descr = `<strong>${arrayElem.Name}</strong><p>${arrayElem.LinkRef}${arrayElem.LinkText}</a>${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
+                let linkref = " <a href=" + arrayElem.LinkRef + " target=\"_blank\" title=\"Opens in a new window\">";
+
+                let descr = `<strong>${arrayElem.Name}</strong><p>${linkref}${arrayElem.LinkText}</a>${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
                                     ${SetStars(arrayElem.Rate)}`;
 
                 let ob = {
