@@ -8,14 +8,14 @@ namespace MVCApp
 {
     public class HomeController : Controller
     {
-        private readonly IDAL bll;
+        //private readonly IDAL bll;
 
-        public HomeController(IDAL bll)
-        {
-            this.bll = bll;
-        }
+        //public HomeController(IDAL bll)
+        //{
+        //    this.bll = bll;
+        //}
 
-       // private readonly IDAL bll = new MyDal();
+        private readonly IDAL bll = new MyDal();
 
         [HttpGet]
         public ActionResult Index()
