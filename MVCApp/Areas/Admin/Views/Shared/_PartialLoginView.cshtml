@@ -4,7 +4,7 @@
         @Html.ActionLink("Exit",
        "LogOut",
        "Account",
-       routeValues:null,
+       routeValues: new { area = "" },
        htmlAttributes:new { @class = "btn btn-outline-danger",
            title = "Run out from here!"})
     </li>
@@ -15,7 +15,7 @@ else
         @Html.ActionLink("Sign Up",
        "Register",
        "Account",
-       routeValues:null,
+       routeValues: new { area ="" },
        htmlAttributes:new { @class = "btn btn-outline-success",
            title = "Hello, my dear new friend!"
        })
@@ -25,7 +25,7 @@ else
         @Html.ActionLink("Sign In",
        "Login",
        "Account",
-       routeValues:null,
+       routeValues: new { area = "" },
        htmlAttributes:new { @class = "btn btn-outline-primary",
            title = "Hello, my dear old friend!"})
     </li>

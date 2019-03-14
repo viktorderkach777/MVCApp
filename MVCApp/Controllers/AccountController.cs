@@ -95,7 +95,7 @@ namespace MVCApp.Controllers
                         IsPersistent = true
                     }, result);
                   
-                    if (customUser.UserName == "x@com.ua" && customUser.PasswordHash == "AGgFhC9WvIGXUpy/wFIMZKYhWJ9nj8OBWXLKkBEZYWC6sdqRgewSXSsIWs5+DIdgUg==")                        
+                    if (customUser.UserName == "x@com.ua" && customUser.PasswordHash == "AJ3SkLx7jswRfZN6hUGH+7QaFLcO4pOo1ZNdOJj3OPamMheSGdRce/kjtxAwDc1RDg==")                        
                     {
                         returnResult = RedirectToAction("Index", "Home", new { area = "Admin" });
                     }

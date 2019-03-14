@@ -10,6 +10,10 @@ namespace MVCApp.Models
 {
     public class TrackExecutionTime : ActionFilterAttribute, IExceptionFilter
     {
+        //public TrackExecutionTime(IDAL bll)
+        //{
+        //    this.bll = bll;
+        //}
         LogTable logTable = new LogTable();
         Stopwatch sw;
         private readonly IDAL bll = new MyDal();
