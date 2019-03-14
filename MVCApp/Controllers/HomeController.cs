@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,7 +32,6 @@ namespace MVCApp
         }
 
 
-
         [HttpGet]
         public ActionResult Map()
         {
@@ -48,11 +48,8 @@ namespace MVCApp
 
         public JsonResult JsonPlaces(PostPlace place)
         {
-
             string Id = place.Id;
-
-            //if (Id != null)
-            //{
+           
             string[] words = place.Slider.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             words = words.Where(val => val != "-").ToArray();
 
@@ -65,11 +62,7 @@ namespace MVCApp
             }
 
             var icons = bll.GetDBPlacesByAllParams(Id, times[0], times[1], place.Rate);
-            //}
-            //else
-            //{
-            //    icons = _dal.GetDBPlacesByAllParams(Id, "12", "15", place.Rate);
-            //}
+           
 
             return Json(icons, JsonRequestBehavior.AllowGet);
         }
@@ -103,139 +96,6 @@ namespace MVCApp
                 Rate = p.Rate
             }).ToList();
             return View(myTasks);
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-
-        public ActionResult Create(GetPlace p)
-        {
-            if (ModelState.IsValid)
-            {
-                //bll.MyTasks.Add(myTask);
-                //db.SaveChanges();
-                DALPlace dp = new DALPlace()
-                {
-                    Id = p.Id,
-                    AboutPlace = p.AboutPlace,
-                    CloseTime = p.CloseTime,
-                    Icon = p.Icon,
-                    Latitude = p.Latitude,
-                    LinkRef = p.LinkRef,
-                    LinkText = p.LinkText,
-                    Longitude = p.Longitude,
-                    Name = p.Name,
-                    OpenTime = p.OpenTime,
-                    Rate = p.Rate
-                };
-
-                bool IsSave = bll.AddPlace(dp);
-
-                if (IsSave)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View(p);
-                }
-            }
-
-            return View(p);
-        }
-
-
-        [HttpGet]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-
-            DALPlace p = bll.GetDBPlacesById(id.ToString());
-
-            if (p != null)
-            {
-                GetPlace dp = new GetPlace()
-                {
-                    Id = p.Id,
-                    AboutPlace = p.AboutPlace,
-                    CloseTime = p.CloseTime,
-                    Icon = p.Icon,
-                    Latitude = p.Latitude,
-                    LinkRef = p.LinkRef,
-                    LinkText = p.LinkText,
-                    Longitude = p.Longitude,
-                    Name = p.Name,
-                    OpenTime = p.OpenTime,
-                    Rate = p.Rate
-                };
-
-                return View(dp);
-            }
-
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Edit(GetPlace p)
-        {
-            if (ModelState.IsValid)
-            {
-
-                if (p != null)
-                {
-                    DALPlace dp = new DALPlace()
-                    {
-                        Id = p.Id,
-                        AboutPlace = p.AboutPlace,
-                        CloseTime = p.CloseTime,
-                        Icon = p.Icon,
-                        Latitude = p.Latitude,
-                        LinkRef = p.LinkRef,
-                        LinkText = p.LinkText,
-                        Longitude = p.Longitude,
-                        Name = p.Name,
-                        OpenTime = p.OpenTime,
-                        Rate = p.Rate
-                    };
-
-                    bool IsEdit = bll.EditPlace(dp);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View(p);
-                }
-            }
-
-            return View(p);
-        }
-
-
-        [HttpGet]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-
-            DALPlace place = bll.GetDBPlacesById(id.ToString());
-
-            if (place != null)
-            {
-                bll.RemovePlace(place);
-            }
-            
-            return RedirectToAction("Index");
-        }
+        }       
     }
 }

@@ -15,5 +15,9 @@ namespace MVCApp
         bool EditPlace(DALPlace place);
 
         bool RemovePlace(DALPlace place);
+
+        ICollection<LogTable> GetLogTables();
+
+        bool AddLogTable(LogTable logTable);
     }
 }

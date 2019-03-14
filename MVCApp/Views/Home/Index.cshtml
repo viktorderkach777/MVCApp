@@ -1,14 +1,181 @@
-﻿@{
-        ViewBag.Title = "Home Page";
+﻿
+<style>
+
+    #forma {
+        visibility: hidden !important;
     }
 
-   
+    html, body {
+        background-color: #2c3e50;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .container {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 100%;
+        justify-content: space-around;
+        position: relative;
+        width: 100%;
+    }
+
+        .container section {
+            width: 100%;
+            height: 100vh;
+            flex: 1;
+            display: flex;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+            .container section:nth-child(1) .image {
+                background-image: url(https://images.unsplash.com/photo-1463412855783-af97e375664b?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section:nth-child(2) .image {
+                background-image: url(https://images.unsplash.com/photo-1462819067004-905a72ea3996?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section:nth-child(3) .image {
+                background-image: url(https://images.unsplash.com/photo-1461770354136-8f58567b617a?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section:nth-child(4) .image {
+                background-image: url(https://images.unsplash.com/photo-1461080639469-66d73688fb21?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section:nth-child(5) .image {
+                background-image: url(https://images.unsplash.com/photo-1460804198264-011ca89eaa43?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section:nth-child(6) .image {
+                background-image: url(https://images.unsplash.com/photo-1463123081488-789f998ac9c4?iq=100&fm=jpg&w=1000);
+            }
+
+            .container section .image {
+                background-attachment: fixed;
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 500;
+                opacity: 0.4;
+            }
+
+            .container section .stuff {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                height: 100%;
+                width: 100%;
+                max-width: 70%;
+                justify-content: center;
+                text-align: center;
+                z-index: 1000;
+                color: #e67e22;
+                margin: 0 auto;
+                font-size: 26px;
+                position: relative;
+            }
+
+                .container section .stuff h2 {
+                    margin: 0px;
+                }
+
+                .container section .stuff:before, .container section .stuff:after {
+                    width: 100%;
+                    height: 1px;
+                    display: block;
+                    background-color: #d35400;
+                    content: "";
+                    margin: 30px 0;
+                }
+
+    .at-twitter {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        color: #f1c40f;
+        z-index: 5000;
+    }
+
+        .at-twitter:visited {
+            color: #f1c40f;
+        }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+        a:hover, a:focus {
+            color: inherit;
+            text-decoration: underline;
+        }
+</style>
+
+<script>
+
+        // makes the parallax elements
+        function parallaxIt() {
+
+            // create variables
+            var fwindow = $(window);
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // on window scroll event
+            $fwindow.on('scroll resize', function () {
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            });
+
+            // for each of content parallax element
+            $('[data-type="content"]').each(function (index, e) {
+                var $contentObj = $(this);
+                var fgOffset = parseInt($contentObj.offset().top);
+                var yPos;
+                var speed = ($contentObj.data('speed') || 1);
+
+                $fwindow.on('scroll resize', function () {
+                    yPos = fgOffset - scrollTop / speed;
+
+                    $contentObj.css('top', yPos);
+                });
+            });
+
+            // for each of background parallax element
+            $('[data-type="background"]').each(function () {
+                var $backgroundObj = $(this);
+                var bgOffset = parseInt($backgroundObj.offset().top);
+                var yPos;
+                var coords;
+                var speed = ($backgroundObj.data('speed') || 0);
+
+                $fwindow.on('scroll resize', function () {
+                    yPos = - ((scrollTop - bgOffset) / speed);
+                    coords = '40% ' + yPos + 'px';
+
+                    $backgroundObj.css({ backgroundPosition: coords });
+                });
+            });
+
+            // triggers winodw scroll for refresh
+            $fwindow.trigger('scroll');
+        };
+
+        //parallaxIt();
+</script>
+
 <div id="content">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
 
-            <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <button type="button" id="sidebarCollapse" class="navbar-btn" style="background-color:cornflowerblue !important">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -25,47 +192,40 @@
         </div>
     </nav>
 
-    <div id="loading" style="display:none; font-weight:bold;">
-        <p style="color:blue;">Loading...</p>
-    </div>
-
     <div id='map' data-counter="0"></div>
+
+    <div class="container">
+        <section>
+            <div class="image" data-type="background" data-speed="2"></div>
+            <div class="stuff" data-type="content"> <h1 class="fontcursive"><sup>&copy;</sup>Tourist App</h1><h4>Enjoy your travel with us!</h4></div>
+        </section>
+
+        <section>
+            <div class="image" data-type="background" data-speed="7"></div>
+            <div class="stuff" data-type="content"><h2>This application is designed to help tourists.</h2><p>The user can remove objects from the map by selecting the appropriate menu items.</p></div>
+        </section>
+
+        <section>
+            <div class="image" data-type="background" data-speed="6"></div>
+            <div class="stuff" data-type="content">The user must first register. If you are an admin you can delete, edit and create place data.</div>
+        </section>
+
+        <section>
+            <div class="image" data-type="background" data-speed="5"></div>
+            <div class="stuff" data-type="content">Accusamus at ex amet perferendis atque fuga, ad earum, ipsa perspiciatis, dolore neque, accusantium consectetur quis voluptatibus culpa architecto animi natus facere expedita sed. Voluptatem odit explicabo amet neque aut.</div>
+        </section>
+
+        <section>
+            <div class="image" data-type="background" data-speed="3"></div>
+            <div class="stuff" data-type="content">Accusamus at ex amet perferendis atque fuga, ad earum, ipsa perspiciatis, dolore neque, accusantium consectetur quis voluptatibus culpa architecto animi natus facere expedita sed. Voluptatem odit explicabo amet neque aut.</div>
+        </section>
+
+        <section>
+            <div class="image" data-type="background" data-speed="3"></div>
+            <div class="stuff" data-type="content">Accusamus at ex amet perferendis atque fuga, ad earum, ipsa perspiciatis, dolore neque, accusantium consectetur quis voluptatibus culpa architecto animi natus facere expedita sed. Voluptatem odit explicabo amet neque aut.</div>
+        </section>
+    </div>
 </div>
 
 
-   
 
-
-@section scripts
-    {
-<style>
-
-    #map {
-        position: relative;
-        top: 0;
-        bottom: 0;
-        width: 120%;
-        height: 80%;
-    }
-
-    .mapboxgl-popup {
-        max-width: 200px;
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        text-align: center;
-    }
-
-    .mapboxgl-popup-content a {
-        color: blue;
-    }
-
-    a:hover {
-        color: purple;
-    }
-
-    #forma {
-        visibility: visible !important;
-    }
-  
-</style>
-   
-}

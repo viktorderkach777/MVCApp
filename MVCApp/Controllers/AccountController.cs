@@ -50,7 +50,8 @@ namespace MVCApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {
@@ -95,7 +96,7 @@ namespace MVCApp.Controllers
                         IsPersistent = true
                     }, result);
 
-                    if (customUser.UserName == "x@x.ua" && customUser.PasswordHash == "AOCNqmW/55SvQ5uoWlffW0Ibikf6F8JywhGnRXbgzPc1DaWUgkGc5FYYqien+qvH+w==")
+                    if (customUser.UserName == "x@x.ua" && customUser.PasswordHash == "AA4nXBTp2NnrDe7FPzak3fFIV9IUrXlJZS3gU8UsvEm6ubMq6vZh5bav5ZojPdw7Ww ==")                        
                     {
                         returnResult = RedirectToAction("Index", "Home", new { area = "Admin" });
                     }

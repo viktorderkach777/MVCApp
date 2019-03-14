@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MVCApp.ViewLogTable>
+
+@{
+    ViewBag.Title = "MyLogTable";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionRunningTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewRenderingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetPostName)
+        </th>       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionRunningTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewRenderingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GetPostName)
+        </td>       
+    </tr>
+}
+
+</table>

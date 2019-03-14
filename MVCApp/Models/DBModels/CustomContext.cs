@@ -19,5 +19,7 @@ namespace MVCApp
         public virtual DbSet<Account> Accounts{get; set;}
 
         public virtual DbSet<DALPlace> DALPlaces { get; set; }
+
+        public virtual DbSet<LogTable> LogTables { get; set; }
     }
 }

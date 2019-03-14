@@ -106,5 +106,27 @@ namespace MVCApp
             return false;
         }
 
+
+        public ICollection<LogTable> GetLogTables()
+        {
+            return ctx.Set<LogTable>().ToList();
+        }
+
+
+        public bool AddLogTable(LogTable logTable)
+        {
+            if (logTable == null)
+            {
+                return false;
+            }
+
+            int count = ctx.LogTables.Count();
+
+            ctx.LogTables.Add(logTable);
+            ctx.SaveChanges();
+
+            return count < ctx.LogTables.Count();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -35,13 +36,14 @@ namespace MVCApp.Areas.Admin.Controllers
             return View(myTasks);
         }
 
-
+        [TrackExecutionTime]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        [TrackExecutionTime]
         [HttpPost]
         public ActionResult Create(GetPlace p)
         {
@@ -73,7 +75,7 @@ namespace MVCApp.Areas.Admin.Controllers
             return View(p);
         }
 
-
+        [TrackExecutionTime]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -108,6 +110,7 @@ namespace MVCApp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [TrackExecutionTime]
         [HttpPost]
         public ActionResult Edit(GetPlace p)
         {
@@ -154,6 +157,23 @@ namespace MVCApp.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+       
+        public ActionResult MyLogTable()
+        {
+            var logTables = bll.GetLogTables().Select(p => new ViewLogTable()
+            {
+                Id = p.Id,
+                ActionName = p.ActionName,
+                ActionRunningTime = p.ActionRunningTime,
+                GetPostName = p.GetPostName,
+                StartTime = p.StartTime,
+                ViewRenderingTime = p.ViewRenderingTime
+
+            }).ToList();
+
+            return View(logTables);
         }
     }
 }
