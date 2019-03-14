@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Map";
+}
+
+
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="list-inline nav navbar-nav ml-auto">
+                    @Html.Partial("_PartialLoginView")
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="loading" style="display:none; font-weight:bold;">
+        <p style="color:blue;">Loading...</p>
+    </div>
+
+    <div id='map' data-counter="0"></div>
+</div>
+
+
+
+
+
+@section scripts
+    {
+    <style>
+
+        #map {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            width: 120%;
+            height: 80%;
+        }
+
+        .mapboxgl-popup {
+            max-width: 200px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .mapboxgl-popup-content a {
+            color: blue;
+        }
+
+        a:hover {
+            color: purple;
+        }
+
+        #forma {
+            visibility: visible !important;
+        }
+    </style>
+
+}
+

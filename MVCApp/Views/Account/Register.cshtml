@@ -23,6 +23,11 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                <div class="form-group registration-form">
+                    @Html.DisplayNameFor(m => m.Login)
+                    @Html.EditorFor(m => m.Login, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
 
                 <div class="form-group registration-form">
                     @Html.DisplayNameFor(m => m.Email)
@@ -39,10 +44,10 @@
                     @Html.EditorFor(m => m.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
 
-                <div class="form-group registration-form">
+                @*<div class="form-group registration-form">
                     @Html.DisplayNameFor(m => m.SkinColor)
                     @Html.EditorFor(m => m.SkinColor, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
+                </div>*@
 
                 <div class="form-group ">
                     <input type="submit" value="Reg me Pls!" class="btn btn-success" />
@@ -64,6 +69,23 @@
     {
 <style>
 
+    #left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: x-large;
+        font-family: cursive;
+        color: deepskyblue;
+    }
+
+    #formOfRegistration h2 {
+        text-align: center;
+    }
+
+    #forma {
+        visibility: hidden !important;
+    }
 
     .register, .signIn {
         color: #444;

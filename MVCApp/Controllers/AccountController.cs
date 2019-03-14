@@ -38,9 +38,10 @@ namespace MVCApp.Controllers
             {
                 CustomUser customUser = new CustomUser
                 {
+                    Login = model.Login,
                     UserName = model.Email,
                     Email = model.Email,
-                    SkinColor = model.SkinColor
+                    //SkinColor = model.SkinColor
                 };
 
                 //create UserWithIdentity from simple User

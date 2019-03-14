@@ -6,6 +6,23 @@
 
 <style>
 
+    #left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: x-large;
+        font-family: cursive;
+        color: deepskyblue;
+    }
+
+    #formOfRegistration h2 {
+        text-align: center;
+    }
+
+    #forma {
+        visibility: hidden !important;
+    }
 
     .register, .signIn {
         color: #444;
@@ -133,7 +150,10 @@
             <div class="form-group registration-form">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="user_name">
-            </div>*@
+            </div>*@                    
+                 
+
+
                 <div class="form-group registration-form">
                     @Html.DisplayNameFor(m => m.Email)
                     @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
@@ -145,37 +165,37 @@
                 </div>
 
 
-               
+
                 @*<div class="form-group registration-form">
                 <label for="emailconfirmation">Email confirmation</label>
                 <input type="email" class="form-control" id="emailconfirmation" name="user_email_again">
             </div>*@
-               
+
                 @*<div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" name="remember"> Remember me
                 </label>
             </div>*@
                 <div class="form-group ">
-                    <input type="submit" value="Log me Pls!" class="btn btn-success"/>
+                    <input type="submit" value="Log me Pls!" class="btn btn-success" />
                 </div>
 
                 <div class="form-group ">
-                    <input type="reset" value="Clear Form" class="btn btn-primary"/>
+                    <input type="reset" value="Clear Form" class="btn btn-primary" />
                 </div>
 
 
 
                 @*<div>
-                    <button type="submit" id="submitButton" class="btn btn-success" data-registred="0"></button>
-                    <button type="button" id="goForwardButton" class="btn btn-success">Go forward!</button>
-                    <div class="alert formalert">
-                        <strong id="alert_main_word"></strong> <span id="alert_message"></span>
-                    </div>
-                </div>*@
+                <button type="submit" id="submitButton" class="btn btn-success" data-registred="0"></button>
+                <button type="button" id="goForwardButton" class="btn btn-success">Go forward!</button>
+                <div class="alert formalert">
+                    <strong id="alert_main_word"></strong> <span id="alert_message"></span>
+                </div>
+            </div>*@
 
             }
-          
+
         </div>
     </div>
 </div>

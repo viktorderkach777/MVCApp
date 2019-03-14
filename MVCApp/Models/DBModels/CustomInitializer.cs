@@ -2,7 +2,7 @@
 
 namespace MVCApp
 {
-    internal class CustomInitializer<T> : DropCreateDatabaseIfModelChanges<CustomContext>
+    internal class CustomInitializer<T> : DropCreateDatabaseAlways<CustomContext>
     {        
 
         protected override void Seed(CustomContext context)
@@ -11,7 +11,7 @@ namespace MVCApp
                 new DALPlace
                 {
                     Name = "Рівненський обласний академічний український музично-драматичний театр",
-                    LinkRef = "\"http://dramteatr.com.ua/\"",
+                    LinkRef = "",
                     LinkText = "Рівненський обласний академічний український музично-драматичний театр",
                     AboutPlace = "  — головна театральна сцена Рівненщини.",
                     OpenTime = 12,
@@ -26,7 +26,7 @@ namespace MVCApp
                new DALPlace
                {
                    Name = "Рівненський обласний академічний ляльковий театр",
-                   LinkRef = "\"http://www.teatr.rv.ua/\"",
+                   LinkRef = "",
                    LinkText = "Дитячий ляльковий театр",
                    AboutPlace = "  — обласний академічний ляльковий театр у місті Рівному.",
                    OpenTime = 8,
@@ -41,7 +41,7 @@ namespace MVCApp
                new DALPlace
                {
                    Name = "Молодіжний експериментальний театр Рівного \"МЕТР\"",
-                   LinkRef = "\"https://metr-ua.livejournal.com/\"",
+                   LinkRef = "",
                    LinkText = "Молодіжний експериментальний театр Рівного \"МЕТР\"",
                    AboutPlace = " — займається організацією мистецьких акцій, виставок, перфомансів, фестивалів. ",
                    OpenTime = 9,
@@ -56,7 +56,7 @@ namespace MVCApp
               new DALPlace
               {
                   Name = "Театр оригінального жанру \"Галатея\"",
-                  LinkRef = "\"http://mpkrivne.com.ua/groups/7-galateja\"",
+                  LinkRef = "",
                   LinkText = "Театр оригінального жанру \"Галатея\"",
                   AboutPlace = " — народний аматорський театр живих скульптур. ",
                   OpenTime = 10,
@@ -71,7 +71,7 @@ namespace MVCApp
              new DALPlace
              {
                  Name = "Театр музичної казки \"Диво\"",
-                 LinkRef = "\"http://teatrdivo.org/\"",
+                 LinkRef = "",
                  LinkText = "Театр музичної казки \"Диво\"",
                  AboutPlace = " — приватний театр на колесах, у якому дорослі грають для дітей. ",
                  OpenTime = 12,
@@ -86,7 +86,7 @@ namespace MVCApp
             new DALPlace
             {
                 Name = "Театр-студія \"Від ліхтаря\"",
-                LinkRef = "\"http://www.pdm.org.ua/special-centers/teatr-studia/teatr-pelagogy\"",
+                LinkRef = "",
                 LinkText = "Театр-студія \"Від ліхтаря\"",
                 AboutPlace = " — один із найкращих молодіжних театрів міста. ",
                 OpenTime = 10,
@@ -100,8 +100,8 @@ namespace MVCApp
             context.DALPlaces.Add(
             new DALPlace
             {
-                Name = "Театр \"Сонях\"",
-                LinkRef = "\"https://www.facebook.com/teatrs.com.ua\"",
+                Name = "Театр \"Сонях\"", 
+                LinkRef = "",
                 LinkText = "Театр \"Сонях\"",
                 AboutPlace = " — один із самодіяльних народних театрів міста. ",
                 OpenTime = 11,
@@ -116,7 +116,7 @@ namespace MVCApp
             new DALPlace
             {
                 Name = "Літературний музей Уласа Самчука",
-                LinkRef = "\"http://museum.rv.gov.ua/vistavka-literaturnij-muzej-ulasa-samchuka/\"",
+                LinkRef = "",
                 LinkText = "Літературний музей Уласа Самчука",
                 AboutPlace = " — музей в залі будинку вчених. ",
                 OpenTime = 09,
@@ -131,7 +131,7 @@ namespace MVCApp
             new DALPlace
             {
                 Name = "Рівненський обласний краєзнавчий музей",
-                LinkRef = "\"http://museum.rv.gov.ua/\"",
+                LinkRef = "",
                 LinkText = "Рівненський обласний краєзнавчий музей",
                 AboutPlace = " —  головне зібрання матеріалів і предметів матеріальної та духовної культури Рівненщини. ",
                 OpenTime = 8,
@@ -147,7 +147,7 @@ namespace MVCApp
             new DALPlace
             {
                 Name = "Музей бурштину",
-                LinkRef = "\"http://museum.rv.gov.ua/struktura-muzeyu/vistavka-muzej-burshtinu/\"",
+                LinkRef = "",
                 LinkText = "Музей бурштину",
                 AboutPlace = " —  єдиний в Україні музей бурштину. ",
                 OpenTime = 10,
@@ -163,7 +163,7 @@ namespace MVCApp
         new DALPlace
         {
             Name = "Музей бойової слави 13-го Армійського корпусу",
-            LinkRef = "\"https://geo.viaregia.org/testbed/index.pl?rm=obj&objid=12794\"",
+            LinkRef = "",
             LinkText = "Музей бойової слави 13-го Армійського корпусу",
             AboutPlace = " — музей присвячено історії 13 армійськоого корпусу. Тут можна дізнатися про подробиці Великої Вітчизняної війни, про визволення Рівного, про партизанський рух у цьому регіоні. ",
             OpenTime = 10,
@@ -178,7 +178,7 @@ namespace MVCApp
             new DALPlace
             {
                 Name = "Готель \"Турист\"",
-                LinkRef = "\"http://rivnetourist.com.ua/\"",
+                LinkRef = "",
                 LinkText = "Готель \"Турист\"",
                 AboutPlace = " - побудовано за індивідуальним проектом і введено в експлуатацію у 1989 році. Усі номери готелю \"Турист\" вирізняються по-домашньому затишним інтер’єром. ",
                 OpenTime = 10,
@@ -193,7 +193,7 @@ namespace MVCApp
              new DALPlace
              {
                  Name = "Готель \"Мир\"",
-                 LinkRef = "\"http://mir-hotel.com/\"",
+                 LinkRef = "",
                  LinkText = "Готель \"Мир\"",
                  AboutPlace = " - сучасний готель з європейським обличчям, що розташований у центрі Рівного. ",
                  OpenTime = 7,

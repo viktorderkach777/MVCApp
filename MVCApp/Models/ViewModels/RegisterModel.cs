@@ -9,6 +9,10 @@ namespace MVCApp.Models.ViewModels
     public class RegisterModel
     {
         [Required]
+        public string Login { get; set; }
+
+
+        [Required]
         public string Email { get; set; }
 
         [Required]
@@ -25,7 +29,7 @@ namespace MVCApp.Models.ViewModels
         //public DateTime LastVisit { get; set; }
 
 
-        [Required]
-        public string SkinColor { get; set; }
+        //[Required]
+        //public string SkinColor { get; set; }
     }
 }

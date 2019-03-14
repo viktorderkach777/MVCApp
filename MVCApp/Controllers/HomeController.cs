@@ -31,6 +31,21 @@ namespace MVCApp
         }
 
 
+
+        [HttpGet]
+        public ActionResult Map()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Map(string Id)
+        {
+            return View("Map", (object)Id);
+        }
+
+
         public JsonResult JsonPlaces(PostPlace place)
         {
 
@@ -73,27 +88,26 @@ namespace MVCApp
 
         public ActionResult Table()
         {
-                var myTasks = bll.GetDBPlaces().Select(p =>new GetPlace() {
-                    Id = p.Id,
-                    AboutPlace = p.AboutPlace,
-                    CloseTime = p.CloseTime,
-                    Icon = p.Icon,
-                    Latitude = p.Latitude,
-                    LinkRef = p.LinkRef,
-                    LinkText = p.LinkText,
-                    Longitude = p.Longitude,
-                    Name = p.Name,
-                    OpenTime = p.OpenTime,
-                    Rate = p.Rate                    
-                }).ToList();
-                return View(myTasks);            
+            var myTasks = bll.GetDBPlaces().Select(p => new GetPlace()
+            {
+                Id = p.Id,
+                AboutPlace = p.AboutPlace,
+                CloseTime = p.CloseTime,
+                Icon = p.Icon,
+                Latitude = p.Latitude,
+                LinkRef = p.LinkRef,
+                LinkText = p.LinkText,
+                Longitude = p.Longitude,
+                Name = p.Name,
+                OpenTime = p.OpenTime,
+                Rate = p.Rate
+            }).ToList();
+            return View(myTasks);
         }
 
         [HttpGet]
-
         public ActionResult Create()
-        {        
-
+        {
             return View();
         }
 
@@ -129,10 +143,10 @@ namespace MVCApp
                 else
                 {
                     return View(p);
-                }               
+                }
             }
 
-                return View(p);
+            return View(p);
         }
 
 
@@ -174,9 +188,9 @@ namespace MVCApp
         public ActionResult Edit(GetPlace p)
         {
             if (ModelState.IsValid)
-            {    
+            {
 
-                if (p!=null)
+                if (p != null)
                 {
                     DALPlace dp = new DALPlace()
                     {
@@ -203,6 +217,25 @@ namespace MVCApp
             }
 
             return View(p);
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            DALPlace place = bll.GetDBPlacesById(id.ToString());
+
+            if (place != null)
+            {
+                bll.RemovePlace(place);
+            }
+            
+            return RedirectToAction("Index");
         }
     }
 }

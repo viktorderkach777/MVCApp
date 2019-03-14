@@ -6,7 +6,7 @@ namespace MVCApp
 {
     public class CustomUser: IdentityUser
     {
-        public string SkinColor { get; set; }
+        public string Login { get; set; }
 
         //gkjgkjgkjgk
         public DateTime? LastVisit { get; set; }

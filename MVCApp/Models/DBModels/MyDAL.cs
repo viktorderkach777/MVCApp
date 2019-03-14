@@ -77,7 +77,7 @@ namespace MVCApp
             ctx.DALPlaces.Add(place);
             ctx.SaveChanges();           
 
-            return count == ctx.DALPlaces.Count();
+            return count < ctx.DALPlaces.Count();
         }
 
         public bool EditPlace(DALPlace place)
@@ -87,6 +87,20 @@ namespace MVCApp
                 ctx.Entry(place).State = EntityState.Modified;
                 ctx.SaveChanges();
                 return true;
+            }
+
+            return false;
+        }
+
+        public bool RemovePlace(DALPlace place)
+        {
+            if (place != null)
+            {
+                int count = ctx.DALPlaces.Count();
+
+                ctx.DALPlaces.Remove(place);
+                ctx.SaveChanges();
+                return count > ctx.DALPlaces.Count();
             }
 
             return false;

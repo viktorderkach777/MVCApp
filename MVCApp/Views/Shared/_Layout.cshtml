@@ -327,40 +327,7 @@
 
         });
 
-        $('input:radio[name="id"]').change(
-            function () {
-                if ($(this).is(':checked') && $(this).val() == 'all') {
-                    // append goes here
-                    console.log("all");
-                    //TouristMap.removeControl(directs);
-                    try {
-                        console.log("try all");
-                        TouristMap.removeControl(directs);
-                    }
-                    catch (e) {
-
-                    }
-
-                    //TouristMap.removeControl(directs);
-                }
-
-                if ($(this).is(':checked') && $(this).val() == 'museum') {
-                    // append goes here
-                    console.log("museum");
-
-                    try {
-                        console.log("try museum");
-                        TouristMap.addControl(directs, 'top-left');
-                    }
-                    catch (e) {
-
-                    }
-
-                    //TouristMap.removeControl(directs);
-                }
-            });
-
-
+       
         function mapOn(placeName) {
             TouristMap.on('click', placeName, function (e) {
                 var coordinates = e.features[0].geometry.coordinates.slice();
@@ -403,9 +370,13 @@
             for (let j = 0; j < data.length; j++) {
                 let arrayElem = data[j];
 
-                let linkref = " <a href=" + arrayElem.LinkRef + " target=\"_blank\" title=\"Opens in a new window\">";
+                //let linkref = /*" <a href=" +*/ arrayElem.LinkRef + " target=\"_blank\" title=\"Opens in a new window\">";
 
-                let descr = `<strong>${arrayElem.Name}</strong><p>${linkref}${arrayElem.LinkText}</a>${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
+                //console.log(linkref);
+                //console.log(arrayElem.LinkRef);
+                //console.log();
+
+                let descr = `<strong>${arrayElem.Name}</strong><p>${arrayElem.LinkRef}${arrayElem.LinkText}${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
                                     ${SetStars(arrayElem.Rate)}`;
 
                 let ob = {
