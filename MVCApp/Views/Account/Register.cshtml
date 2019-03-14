@@ -6,62 +6,91 @@
 }
 
 
-<div class="container" id="formOfRegistration">
-    <h2>Fill the form please:</h2>
+<div id="content">
 
-    <div class="row" id="mainFrameDiv" style="background-color:honeydew;">
-        <div id="left" class="col-sm-6">
-            <span><sup>&copy;</sup>Tourist app helps to enjoy your travel or business trip.</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="list-inline nav navbar-nav ml-auto">
+                    @Html.Partial("_PartialLoginView")
+                </ul>
+            </div>
         </div>
-        <div id="right" class="col-sm-6">
+    </nav>
+
+    <div id='map' data-counter="0"></div>
+
+    <div class="container" id="formOfRegistration">
+        <h2>Fill the form please:</h2>
+
+        <div class="row" id="mainFrameDiv" style="background-color:honeydew;">
+            <div id="left" class="col-sm-6">
+                <span><sup>&copy;</sup>Tourist app helps to enjoy your travel or business trip.</span>
+            </div>
+            <div id="right" class="col-sm-6">
 
 
-            @using (Html.BeginForm())
-            {
+                @using (Html.BeginForm())
+                {
 
 
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="form-group registration-form">
                     @Html.DisplayNameFor(m => m.Login)
                     @Html.EditorFor(m => m.Login, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                 </div>
 
 
-                <div class="form-group registration-form">
-                    @Html.DisplayNameFor(m => m.Email)
-                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
+                    <div class="form-group registration-form">
+                        @Html.DisplayNameFor(m => m.Email)
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group registration-form">
-                    @Html.DisplayNameFor(m => m.Password)
-                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
+                    <div class="form-group registration-form">
+                        @Html.DisplayNameFor(m => m.Password)
+                        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group registration-form">
-                    @Html.DisplayNameFor(m => m.PasswordConfirm)
-                    @Html.EditorFor(m => m.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
+                    <div class="form-group registration-form">
+                        @Html.DisplayNameFor(m => m.PasswordConfirm)
+                        @Html.EditorFor(m => m.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.PasswordConfirm, "", new { @class = "text-danger" })
+                    </div>
 
-                @*<div class="form-group registration-form">
-                    @Html.DisplayNameFor(m => m.SkinColor)
-                    @Html.EditorFor(m => m.SkinColor, new { htmlAttributes = new { @class = "form-control" } })
-                </div>*@
+                    <div class="form-group ">
+                        <input type="submit" value="Reg me Pls!" class="btn btn-success" />
+                    </div>
 
-                <div class="form-group ">
-                    <input type="submit" value="Reg me Pls!" class="btn btn-success" />
-                </div>
+                    <div class="form-group ">
+                        <input type="reset" value="Clear Form" class="btn btn-primary" />
+                    </div>
 
-                <div class="form-group ">
-                    <input type="reset" value="Clear Form" class="btn btn-primary" />
-                </div>
+                }
 
-            }
-
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 

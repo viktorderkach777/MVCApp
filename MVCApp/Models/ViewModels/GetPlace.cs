@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace MVCApp
@@ -35,6 +32,7 @@ namespace MVCApp
         [Range(0, 5, ErrorMessage = "Value must be in [0;5]")]
         public int Rate { get; set; }
 
+        [ValidIcon]
         [Required(ErrorMessage = "Icon is Required")]
         [StringLength(200, MinimumLength = 3, ErrorMessage = "String length must be between 3 and 200 characters")]
         public string Icon { get; set; }

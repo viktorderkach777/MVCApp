@@ -163,8 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ErrorLogs\ErrorLogs.txt" />
-    <Content Include="Infrastructure\DAL\ConcreteClasses\TouristApp.cs" />
-    <Content Include="Infrastructure\DAL\ConcreteClasses\CustomInitializer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\CustomNinjectModule.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -174,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Attributes\TrackExecutionTime.cs" />
+    <Compile Include="Models\Attributes\ValidIcon.cs" />
     <Compile Include="Models\DBModels\IDAL.cs" />
     <Compile Include="Models\DBModels\CustomInitializer.cs" />
     <Compile Include="Models\DBModels\CustomUserManager.cs" />
@@ -329,13 +328,13 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_PartialLoginView.cshtml" />
-    <Content Include="Views\Home\Table.cshtml" />
     <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Infrastructure\DAL\AbstractClasses\" />
+    <Folder Include="Infrastructure\DAL\ConcreteClasses\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -175,5 +175,6 @@ namespace MVCApp.Areas.Admin.Controllers
 
             return View(logTables);
         }
+       
     }
 }

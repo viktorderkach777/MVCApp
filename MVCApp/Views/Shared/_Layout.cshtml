@@ -267,31 +267,15 @@
             center: [longitude, latitude], // starting position
             zoom: myZoom // starting zoom
         });
-
-        //TouristMap.addControl(new MapboxDirections({
-        //    accessToken: mapboxgl.accessToken,
-        //    unit: 'metric'
-        //}), 'top-left');
-
-        //TouristMap.getCanvas().style.cursor = 'pointer';
-
-        //$('input:radio[name="id"]').change(
-        //    function () {
-        //        if ($(this).is(':checked') && $(this).val() == 'all') {
-        //            // append goes here
-        //            console.log("fhjgjh");
-        //        }
-        //    });
+       
 
         let directs = new MapboxDirections({
             accessToken: mapboxgl.accessToken,
             unit: 'metric'
-        })
-
-        //TouristMap.addControl(directs, 'top-left');
+        })       
 
         TouristMap.getCanvas().style.cursor = 'pointer';
-        //TouristMap.getCanvas().style.
+       
 
         $('.register').click(function (e) {
 
@@ -368,15 +352,13 @@
             let counter = +$('#map').attr("data-counter");
 
             for (let j = 0; j < data.length; j++) {
-                let arrayElem = data[j];
 
-                //let linkref = /*" <a href=" +*/ arrayElem.LinkRef + " target=\"_blank\" title=\"Opens in a new window\">";
+                let arrayElem = data[j];  
+                let linkRef = "";
 
-                //console.log(linkref);
-                //console.log(arrayElem.LinkRef);
-                //console.log();
+                linkRef = arrayElem.LinkRef == null ? "" : arrayElem.LinkRef;
 
-                let descr = `<strong>${arrayElem.Name}</strong><p>${arrayElem.LinkRef}${arrayElem.LinkText}${arrayElem.AboutPlace}</p><p>${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
+                let descr = `<strong>${arrayElem.Name}</strong><p style=\"color:black !important;\">${linkRef}${arrayElem.LinkText}${arrayElem.AboutPlace}</p><p style=\"color:black !important;\">${arrayElem.OpenTime}-${arrayElem.CloseTime}</p>
                                     ${SetStars(arrayElem.Rate)}`;
 
                 let ob = {

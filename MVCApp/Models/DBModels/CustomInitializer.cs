@@ -2,7 +2,7 @@
 
 namespace MVCApp
 {
-    internal class CustomInitializer<T> : DropCreateDatabaseAlways<CustomContext>
+    internal class CustomInitializer<T> : DropCreateDatabaseIfModelChanges<CustomContext>
     {        
 
         protected override void Seed(CustomContext context)

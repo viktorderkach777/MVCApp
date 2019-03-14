@@ -40,8 +40,7 @@ namespace MVCApp.Controllers
                 {
                     Login = model.Login,
                     UserName = model.Email,
-                    Email = model.Email,
-                    //SkinColor = model.SkinColor
+                    Email = model.Email                    
                 };
 
                 //create UserWithIdentity from simple User
@@ -95,21 +94,19 @@ namespace MVCApp.Controllers
                     {
                         IsPersistent = true
                     }, result);
-
-                    if (customUser.UserName == "x@x.ua" && customUser.PasswordHash == "AA4nXBTp2NnrDe7FPzak3fFIV9IUrXlJZS3gU8UsvEm6ubMq6vZh5bav5ZojPdw7Ww ==")                        
+                  
+                    if (customUser.UserName == "x@com.ua" && customUser.PasswordHash == "AGgFhC9WvIGXUpy/wFIMZKYhWJ9nj8OBWXLKkBEZYWC6sdqRgewSXSsIWs5+DIdgUg==")                        
                     {
                         returnResult = RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
                     else if (String.IsNullOrEmpty(returnUrl))
                     {                        
-                       
-                            returnResult = RedirectToAction("Index", "Home");                    
-                       
-                       
+                       returnResult = RedirectToAction("Map", "Home");                                                
                     }
                     else
                     {
-                        returnResult = Redirect(returnUrl);
+                        returnResult = RedirectToAction("Index", "Home");
+                        //returnResult = Redirect(returnUrl);
                         //return Redirect(returnUrl);
                     }
                 }               
